@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "sources", "{A16B85B6-8111-4116-BDDB-21E0628B3868}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "tests", "{A6576493-556B-4B91-BE64-DD39BBFC72EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Benchmarks", "tests\Sponge.Benchmarks\Sponge.Benchmarks.csproj", "{681EA98C-C444-479F-9FD5-D9E9E965990D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Tests", "tests\Sponge.Tests\Sponge.Tests.csproj", "{BA55D944-7B26-4049-AAB2-20929E962972}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge", "sources\Sponge\Sponge.csproj", "{BBA95841-C63C-4C9A-9B83-6292652CE307}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Converter", "sources\Sponge.Converter\Sponge.Converter.csproj", "{F4276289-6506-485E-B642-70CD06B92C86}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Wrapper", "sources\Sponge.Wrapper\Sponge.Wrapper.csproj", "{1816E96D-6291-40DD-83B7-E1A78906D81C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{681EA98C-C444-479F-9FD5-D9E9E965990D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{681EA98C-C444-479F-9FD5-D9E9E965990D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{681EA98C-C444-479F-9FD5-D9E9E965990D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{681EA98C-C444-479F-9FD5-D9E9E965990D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA55D944-7B26-4049-AAB2-20929E962972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA55D944-7B26-4049-AAB2-20929E962972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA55D944-7B26-4049-AAB2-20929E962972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA55D944-7B26-4049-AAB2-20929E962972}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBA95841-C63C-4C9A-9B83-6292652CE307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA95841-C63C-4C9A-9B83-6292652CE307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA95841-C63C-4C9A-9B83-6292652CE307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA95841-C63C-4C9A-9B83-6292652CE307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4276289-6506-485E-B642-70CD06B92C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4276289-6506-485E-B642-70CD06B92C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4276289-6506-485E-B642-70CD06B92C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4276289-6506-485E-B642-70CD06B92C86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1816E96D-6291-40DD-83B7-E1A78906D81C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1816E96D-6291-40DD-83B7-E1A78906D81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1816E96D-6291-40DD-83B7-E1A78906D81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1816E96D-6291-40DD-83B7-E1A78906D81C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{681EA98C-C444-479F-9FD5-D9E9E965990D} = {A6576493-556B-4B91-BE64-DD39BBFC72EE}
+		{BA55D944-7B26-4049-AAB2-20929E962972} = {A6576493-556B-4B91-BE64-DD39BBFC72EE}
+		{BBA95841-C63C-4C9A-9B83-6292652CE307} = {A16B85B6-8111-4116-BDDB-21E0628B3868}
+		{F4276289-6506-485E-B642-70CD06B92C86} = {A16B85B6-8111-4116-BDDB-21E0628B3868}
+		{1816E96D-6291-40DD-83B7-E1A78906D81C} = {A16B85B6-8111-4116-BDDB-21E0628B3868}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9098E317-B148-4563-B6F5-FE44C051645D}
+	EndGlobalSection
+EndGlobal
