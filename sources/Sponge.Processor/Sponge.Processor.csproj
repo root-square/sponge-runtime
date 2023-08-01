@@ -10,15 +10,14 @@
   <ItemGroup>
     <PackageReference Include="BitFaster.Caching" Version="2.2.0" />
     <PackageReference Include="LiteDB" Version="5.0.17" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="NAudio" Version="2.1.0" />
     <PackageReference Include="NAudio.Vorbis" Version="1.5.0" />
+    <PackageReference Include="NetCoreServer" Version="7.0.0" />
     <PackageReference Include="NetVips" Version="2.3.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="Serilog" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
 
 </Project>
