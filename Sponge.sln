@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "sources", "{A16B85B6-8111-4116-BDDB-21E0628B3868}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "src", "{A16B85B6-8111-4116-BDDB-21E0628B3868}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "tests", "{A6576493-556B-4B91-BE64-DD39BBFC72EE}"
 EndProject
@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Benchmarks", "tests\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Tests", "tests\Sponge.Tests\Sponge.Tests.csproj", "{BA55D944-7B26-4049-AAB2-20929E962972}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge", "sources\Sponge\Sponge.csproj", "{BBA95841-C63C-4C9A-9B83-6292652CE307}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge", "src\Sponge\Sponge.csproj", "{BBA95841-C63C-4C9A-9B83-6292652CE307}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Bootstrapper", "sources\Sponge.Bootstrapper\Sponge.Bootstrapper.csproj", "{1816E96D-6291-40DD-83B7-E1A78906D81C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Bootstrapper", "src\Sponge.Bootstrapper\Sponge.Bootstrapper.csproj", "{1816E96D-6291-40DD-83B7-E1A78906D81C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Processor", "sources\Sponge.Processor\Sponge.Processor.csproj", "{F4276289-6506-485E-B642-70CD06B92C86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Processor", "src\Sponge.Processor\Sponge.Processor.csproj", "{F4276289-6506-485E-B642-70CD06B92C86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

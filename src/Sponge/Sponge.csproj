@@ -19,4 +19,15 @@
     <PackageReference Include="Squid-Box.SevenZipSharp.Lite" Version="1.6.1.23" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Converters\" />
+    <Folder Include="Assets\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Utilities\" />
+    <Folder Include="Validators\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
+
 </Project>
