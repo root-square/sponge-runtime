@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Externals\" />
+    <Folder Include="Assets\" />
     <Folder Include="Services\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
