@@ -19,8 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Assets\Locales\" />
+    <Folder Include="Assets\Styles\" />
     <Folder Include="Converters\" />
-    <Folder Include="Assets\" />
     <Folder Include="Extensions\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Controls\" />
