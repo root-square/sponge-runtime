@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Sponge.Processor.Commands
 {
-    [Command("analyze", Description = "Checks the status of the Sponge system.")]
-    public class AnalyzeCommand : ICommand
+    [Command("doctor", Description = "Finds and solves problems in the Sponge Processor.")]
+    public class DoctorCommand : ICommand
     {
         public ValueTask ExecuteAsync(IConsole console)
         {
