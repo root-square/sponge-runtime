@@ -18,7 +18,7 @@ namespace Sponge.Processor
             var task = Task.Factory.StartNew(() =>
             {
                 // Initialize a Serilog logger.
-                string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\.log");
+                string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\spgproc-.log");
                 string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u4}] {Message}{NewLine}{Exception}";
 
                 Log.Logger = new LoggerConfiguration()
