@@ -23,7 +23,7 @@ namespace Sponge.Processor
                 bool enableDebugMode = ConsoleHelper.Parse<bool>(args, "debug", 'd', false);
                 bool enableSilentMode = ConsoleHelper.Parse<bool>(args, "silent", 's', true);
 
-                // Initialize a Serilog logger.
+                // Initialize the Serilog logger.
                 string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\spgproc-.log");
                 string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u4}] {Message}{NewLine}{Exception}";
 
@@ -33,16 +33,31 @@ namespace Sponge.Processor
                     .WriteTo.Async(a => a.File(fileName, outputTemplate: outputTemplateString, rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 10485760))
                     .CreateLogger();
 
-                Log.Debug("The Serilog logger has initialized.");
+                Log.Verbose("Initialized the Serilog logger.");
 
-                // Initialize an unhandled exception handler.
+                // Initialize the global exception handler.
                 AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
                 {
                     Log.Fatal(e.ExceptionObject as Exception, "An unhandled exception has been occurred. If the same problem persists, please report it to the program provider.");
                     Log.CloseAndFlush();
                 };
 
-                Log.Debug("The global exception handler has initialized.");
+                Log.Verbose("Initialized the global exception handler.");
+
+                // Enable silent mode.
+                if (enableSilentMode)
+                {
+                    bool result = ConsoleHelper.HideWindow();
+
+                    if (result)
+                    {
+                        Log.Verbose("Enabled silent mode.");
+                    }
+                    else
+                    {
+                        Log.Error("Failed to start with silent mode.");
+                    }
+                }
             });
 
             await task;
@@ -70,7 +85,7 @@ namespace Sponge.Processor
                 .Build()
                 .RunAsync();
 
-            Log.Debug("The bootstrap process has completed(CODE : {result}).", result);
+            Log.Debug("The process exited(CODE : {result}).", result);
 
             await Log.CloseAndFlushAsync();
 
