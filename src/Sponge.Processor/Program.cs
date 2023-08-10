@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using Sponge.Processor.Utilities;
 
 namespace Sponge.Processor
 {
@@ -10,17 +11,17 @@ namespace Sponge.Processor
     {
         public static async Task<int> Main(string[] args)
         {
-            await InitializeAsync();
+            await InitializeAsync(args);
             return await RunAsync();
         }
 
-        private static async Task InitializeAsync()
+        private static async Task InitializeAsync(string[] args)
         {
             var task = Task.Factory.StartNew(() =>
             {
                 // Parse options temporarily.
-                bool enableDebugMode = true;
-                bool enableSilentMode = true;
+                bool enableDebugMode = ConsoleHelper.Parse<bool>(args, "debug", 'd', false);
+                bool enableSilentMode = ConsoleHelper.Parse<bool>(args, "silent", 's', true);
 
                 // Initialize a Serilog logger.
                 string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\spgproc-.log");

@@ -44,5 +44,28 @@ namespace Sponge.Bootstrapper.Utilities
                 return false;
             }
         }
+
+        internal static T? Parse<T>(string[]args, string name, char shortName, T defaultValue)
+        {
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (string.Equals(args[i], $"--{name}", StringComparison.OrdinalIgnoreCase) || string.Equals(args[i], $"-{shortName}", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (i + 1 == args.Length || args[i + 1].StartsWith('-'))
+                    {
+                        if (typeof(T) == typeof(bool))
+                        {
+                            return (T)Convert.ChangeType(true, typeof(T));
+                        }
+
+                        return defaultValue;
+                    }
+
+                    return (T)Convert.ChangeType(args[i + 1], typeof(T));
+                }
+            }
+
+            return defaultValue;
+        }
     }
 }

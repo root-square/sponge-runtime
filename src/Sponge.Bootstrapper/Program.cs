@@ -5,6 +5,7 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using Sponge.Bootstrapper.Utilities;
 
 namespace Sponge.Bootstrapper
 {
@@ -21,8 +22,8 @@ namespace Sponge.Bootstrapper
             var task = Task.Factory.StartNew(() =>
             {
                 // Parse options temporarily.
-                bool enableDebugMode = true;
-                bool enableSilentMode = true;
+                bool enableDebugMode = ConsoleHelper.Parse<bool>(args, "debug", 'd', false);
+                bool enableSilentMode = ConsoleHelper.Parse<bool>(args, "silent", 's', true);
 
                 // Initialize a Serilog logger.
                 string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\spgboot-.log");
