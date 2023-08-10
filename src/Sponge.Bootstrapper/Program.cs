@@ -1,7 +1,10 @@
 ﻿using CliFx;
+using CliWrap;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using Serilog.Core;
 using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Sponge.Bootstrapper
 {
@@ -9,29 +12,38 @@ namespace Sponge.Bootstrapper
     {
         public static async Task<int> Main(string[] args)
         {
-            await InitializeAsync();
+            await InitializeAsync(args);
             return await RunAsync();
         }
 
-        private static async Task InitializeAsync()
+        private static async Task InitializeAsync(string[] args)
         {
             var task = Task.Factory.StartNew(() =>
             {
+                // Parse options temporarily.
+                bool enableDebugMode = true;
+                bool enableSilentMode = true;
+
                 // Initialize a Serilog logger.
                 string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\spgboot-.log");
                 string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u4}] {Message}{NewLine}{Exception}";
 
                 Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Async(a => a.Console(restrictedToMinimumLevel: LogEventLevel.Verbose, outputTemplate: outputTemplateString))
-                    .WriteTo.Async(a => a.File(fileName, restrictedToMinimumLevel: LogEventLevel.Verbose, outputTemplate: outputTemplateString, rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 10485760))
+                    .MinimumLevel.Is(enableDebugMode ? LogEventLevel.Verbose : LogEventLevel.Information)
+                    .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateString, theme: AnsiConsoleTheme.Code))
+                    .WriteTo.Async(a => a.File(fileName, outputTemplate: outputTemplateString, rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 10485760))
                     .CreateLogger();
 
-                // Initialize an unhandled exception handler.
+                Log.Debug("The Serilog logger has initialized.");
+
+                // Initialize a global exception handler.
                 AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
                 {
                     Log.Fatal(e.ExceptionObject as Exception, "An unhandled exception has been occurred. If the same problem persists, please report it to the program provider.");
                     Log.CloseAndFlush();
                 };
+
+                Log.Debug("The global exception handler has initialized.");
             });
 
             await task;
@@ -41,7 +53,7 @@ namespace Sponge.Bootstrapper
         {
             int result = await new CliApplicationBuilder()
                 .SetTitle("Sponge Bootstrapper")
-                .SetDescription("An application that builds an environment for the Sponge.")
+                .SetDescription("An application bootstrapping the specified game executable file and the Sponge system.")
                 .SetExecutableName("./" + (Path.GetFileName(Environment.ProcessPath) ?? "spgboot.exe"))
                 .AddCommandsFromThisAssembly()
                 .UseTypeActivator(commandTypes =>
@@ -56,6 +68,8 @@ namespace Sponge.Bootstrapper
                 })
                 .Build()
                 .RunAsync();
+
+            Log.Debug("The bootstrap process has completed(CODE : {result}).", result);
 
             await Log.CloseAndFlushAsync();
 

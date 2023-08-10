@@ -9,9 +9,15 @@ using System.Threading.Tasks;
 
 namespace Sponge.Processor.Commands
 {
-    [Command("doctor", Description = "Finds and solves problems in the Sponge Processor.")]
-    public class DoctorCommand : ICommand
+    [Command()]
+    public class DefaultCommand : ICommand
     {
+        [CommandOption("debug", 'd', Description = "Enables debug mode.")]
+        public bool EnableDebugMode { get; init; } = false;
+
+        [CommandOption("silent", 's', Description = "Enables silent mode.")]
+        public bool EnableSilentMode { get; init; } = true;
+
         public ValueTask ExecuteAsync(IConsole console)
         {
             return default;

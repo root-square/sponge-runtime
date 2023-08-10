@@ -13,17 +13,15 @@ namespace Sponge.Bootstrapper.Commands
     [Command()]
     public class DefaultCommand : ICommand
     {
-        [CommandOption("launch-proc", 'p', Description = "Launches a Sponge Processor instance.")]
-        public bool LaunchProcessor { get; init; } = true;
+        [CommandOption("debug", 'd', Description = "Enables debug mode.")]
+        public bool EnableDebugMode { get; init; } = false;
 
-        [CommandOption("launch-game", 'g', Description = "Launches the specified game.")]
-        public bool LaunchGame { get; init; } = true;
+        [CommandOption("silent", 's', Description = "Enables silent mode.")]
+        public bool EnableSilentMode { get; init; } = true;
 
         public ValueTask ExecuteAsync(IConsole console)
         {
-            Log.Warning("BST COM NOT IMPL");
             return default;
-            //throw new NotImplementedException();
         }
     }
 }

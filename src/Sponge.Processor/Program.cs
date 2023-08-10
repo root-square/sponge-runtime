@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Sponge.Processor
 {
@@ -17,14 +18,21 @@ namespace Sponge.Processor
         {
             var task = Task.Factory.StartNew(() =>
             {
+                // Parse options temporarily.
+                bool enableDebugMode = true;
+                bool enableSilentMode = true;
+
                 // Initialize a Serilog logger.
                 string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\spgproc-.log");
                 string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u4}] {Message}{NewLine}{Exception}";
 
                 Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Async(a => a.Console(restrictedToMinimumLevel: LogEventLevel.Verbose, outputTemplate: outputTemplateString))
-                    .WriteTo.Async(a => a.File(fileName, restrictedToMinimumLevel: LogEventLevel.Verbose, outputTemplate: outputTemplateString, rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 10485760))
+                    .MinimumLevel.Is(enableDebugMode ? LogEventLevel.Verbose : LogEventLevel.Information)
+                    .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateString, theme: AnsiConsoleTheme.Code))
+                    .WriteTo.Async(a => a.File(fileName, outputTemplate: outputTemplateString, rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 10485760))
                     .CreateLogger();
+
+                Log.Debug("The Serilog logger has initialized.");
 
                 // Initialize an unhandled exception handler.
                 AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
@@ -32,6 +40,8 @@ namespace Sponge.Processor
                     Log.Fatal(e.ExceptionObject as Exception, "An unhandled exception has been occurred. If the same problem persists, please report it to the program provider.");
                     Log.CloseAndFlush();
                 };
+
+                Log.Debug("The global exception handler has initialized.");
             });
 
             await task;
@@ -41,7 +51,7 @@ namespace Sponge.Processor
         {
             int result = await new CliApplicationBuilder()
                 .SetTitle("Sponge Processor")
-                .SetDescription("An application providing core functions of the Sponge.")
+                .SetDescription("An application providing core functions of Sponge.")
                 .SetExecutableName("./" + (Path.GetFileName(Environment.ProcessPath) ?? "spgproc.exe"))
                 .AddCommandsFromThisAssembly()
                 .UseTypeActivator(commandTypes =>
@@ -58,6 +68,8 @@ namespace Sponge.Processor
                 })
                 .Build()
                 .RunAsync();
+
+            Log.Debug("The bootstrap process has completed(CODE : {result}).", result);
 
             await Log.CloseAndFlushAsync();
 
