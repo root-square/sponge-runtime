@@ -19,20 +19,20 @@ namespace Sponge.Processor
         {
             var task = Task.Factory.StartNew(() =>
             {
-                // Parse options temporarily.
+                // Parse global options.
                 bool enableDebugMode = ConsoleHelper.Parse<bool>(args, "debug", 'd', false);
 
                 // Initialize the Serilog logger.
-                string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\spgproc-.log");
+                string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\.log");
                 string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u4}] {Message}{NewLine}{Exception}";
 
                 Log.Logger = new LoggerConfiguration()
                     .MinimumLevel.Is(enableDebugMode ? LogEventLevel.Verbose : LogEventLevel.Information)
                     .WriteTo.Async(a => a.Console(outputTemplate: outputTemplateString, theme: AnsiConsoleTheme.Code))
-                    .WriteTo.Async(a => a.File(fileName, outputTemplate: outputTemplateString, rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 10485760))
+                    .WriteTo.Async(a => a.File(fileName, outputTemplate: outputTemplateString, shared: true, rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 10485760))
                     .CreateLogger();
 
-                Log.Verbose("Initialized the Serilog logger.");
+                Log.Verbose("The logging system has initialized.");
 
                 // Initialize the global exception handler.
                 AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
@@ -41,7 +41,7 @@ namespace Sponge.Processor
                     Log.CloseAndFlush();
                 };
 
-                Log.Verbose("Initialized the global exception handler.");
+                Log.Verbose("The global exception handler has initialized.");
             });
 
             await task;
