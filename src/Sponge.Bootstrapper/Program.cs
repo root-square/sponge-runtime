@@ -58,7 +58,9 @@ namespace Sponge.Bootstrapper
                 .AddCommandsFromThisAssembly()
                 .UseTypeActivator(commandTypes =>
                 {
+                    // We use Microsoft.Extensions.DependencyInjection for injecting dependencies in commands
                     var services = new ServiceCollection();
+                    // services.AddSingleton<LibraryProvider>();
 
                     // Register all commands as transient services
                     foreach (var commandType in commandTypes)
