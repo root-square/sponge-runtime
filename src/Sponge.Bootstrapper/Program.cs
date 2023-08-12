@@ -23,7 +23,6 @@ namespace Sponge.Bootstrapper
             {
                 // Parse options temporarily.
                 bool enableDebugMode = ConsoleHelper.Parse<bool>(args, "debug", 'd', false);
-                bool enableSilentMode = ConsoleHelper.Parse<bool>(args, "silent", 's', true);
 
                 // Initialize the Serilog logger.
                 string fileName = Path.Combine(Environment.CurrentDirectory, @"logs\spgboot-.log");
@@ -45,21 +44,6 @@ namespace Sponge.Bootstrapper
                 };
 
                 Log.Verbose("Initialized the global exception handler.");
-
-                // Enable silent mode.
-                if (enableSilentMode)
-                {
-                    bool result = ConsoleHelper.HideWindow();
-
-                    if (result)
-                    {
-                        Log.Verbose("Enabled silent mode.");
-                    }
-                    else
-                    {
-                        Log.Error("Failed to start with silent mode.");
-                    }
-                }
             });
 
             await task;

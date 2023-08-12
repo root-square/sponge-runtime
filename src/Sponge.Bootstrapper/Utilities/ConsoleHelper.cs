@@ -9,42 +9,6 @@ namespace Sponge.Bootstrapper.Utilities
 {
     internal static class ConsoleHelper
     {
-        [DllImport("kernel32.dll")]
-        private static extern IntPtr GetConsoleWindow();
-
-        [DllImport("User32.dll")]
-        private static extern bool ShowWindow(IntPtr hWnd, int cmdShow);
-
-        internal static bool HideWindow()
-        {
-            IntPtr hWnd = GetConsoleWindow();
-
-            if (hWnd != IntPtr.Zero)
-            {
-                ShowWindow(hWnd, 0);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        internal static bool ShowWindow()
-        {
-            IntPtr hWnd = GetConsoleWindow();
-
-            if (hWnd != IntPtr.Zero)
-            {
-                ShowWindow(hWnd, 1);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         internal static T? Parse<T>(string[]args, string name, char shortName, T defaultValue)
         {
             for (int i = 0; i < args.Length; i++)
