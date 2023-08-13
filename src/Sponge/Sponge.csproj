@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.212" />
     <PackageReference Include="CliWrap" Version="3.6.4" />
     <PackageReference Include="LiteDB" Version="5.0.17" />
@@ -32,6 +36,10 @@
     <Folder Include="Validators\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\icon.ico" />
   </ItemGroup>
 
 </Project>
