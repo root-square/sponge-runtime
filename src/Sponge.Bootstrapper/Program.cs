@@ -54,7 +54,7 @@ namespace Sponge.Bootstrapper
             int result = await new CliApplicationBuilder()
                 .SetTitle("Sponge Bootstrapper")
                 .SetDescription("An application bootstrapping the specified game executable file and the Sponge system.")
-                .SetExecutableName("./" + (Path.GetFileName(Environment.ProcessPath) ?? "spgboot.exe"))
+                .SetExecutableName("./" + (Path.GetFileName(Environment.ProcessPath) ?? "SpongeBootstrapper.exe"))
                 .AddCommandsFromThisAssembly()
                 .UseTypeActivator(commandTypes =>
                 {

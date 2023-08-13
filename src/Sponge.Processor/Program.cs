@@ -52,7 +52,7 @@ namespace Sponge.Processor
             int result = await new CliApplicationBuilder()
                 .SetTitle("Sponge Processor")
                 .SetDescription("An application providing core functions of Sponge.")
-                .SetExecutableName("./" + (Path.GetFileName(Environment.ProcessPath) ?? "spgproc.exe"))
+                .SetExecutableName("./" + (Path.GetFileName(Environment.ProcessPath) ?? "SpongeProcessor.exe"))
                 .AddCommandsFromThisAssembly()
                 .UseTypeActivator(commandTypes =>
                 {
