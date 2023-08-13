@@ -5,9 +5,9 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
-using Sponge.Bootstrapper.Utilities;
+using Sponge.Manager.Utilities;
 
-namespace Sponge.Bootstrapper
+namespace Sponge.Manager
 {
     public class Program
     {

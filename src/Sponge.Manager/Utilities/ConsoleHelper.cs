@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Bootstrapper.Utilities
+namespace Sponge.Manager.Utilities
 {
     internal static class ConsoleHelper
     {
