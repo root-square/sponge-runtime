@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Processor.Commands
+namespace Sponge.Worker.Commands
 {
     [Command()]
     public class DefaultCommand : ICommand

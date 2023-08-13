@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Processor.Extensions
+namespace Sponge.Worker.Extensions
 {
     internal static class StringExtensions
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Processor.Commands
+namespace Sponge.Worker.Commands
 {
     [Command("doctor", Description = "Checks the condition of the Sponge system.")]
     public class DoctorCommand : ICommand

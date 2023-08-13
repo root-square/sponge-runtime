@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
-using Sponge.Processor.Utilities;
+using Sponge.Worker.Utilities;
 
-namespace Sponge.Processor
+namespace Sponge.Worker
 {
     public class Program
     {

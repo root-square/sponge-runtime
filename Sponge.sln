@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge", "src\Sponge\Sponge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Manager", "src\Sponge.Manager\Sponge.Manager.csproj", "{1816E96D-6291-40DD-83B7-E1A78906D81C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Processor", "src\Sponge.Processor\Sponge.Processor.csproj", "{F4276289-6506-485E-B642-70CD06B92C86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sponge.Worker", "src\Sponge.Worker\Sponge.Worker.csproj", "{F4276289-6506-485E-B642-70CD06B92C86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

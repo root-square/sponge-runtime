@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Processor.Services
+namespace Sponge.Worker.Services
 {
     internal class DatabaseManager
     {

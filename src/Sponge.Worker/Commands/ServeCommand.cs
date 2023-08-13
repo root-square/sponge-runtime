@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Processor.Commands
+namespace Sponge.Worker.Commands
 {
-    [Command("unpack", Description = "Unpacks the game in the current directory.")]
-    public class UnpackCommand : ICommand
+    [Command("serve", Description = "Starts the processing server.")]
+    public class ServeCommand : ICommand
     {
         public ValueTask ExecuteAsync(IConsole console)
         {

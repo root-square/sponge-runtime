@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Processor.Commands
+namespace Sponge.Worker.Commands
 {
     [Command("pack", Description = "Packs the game in the current directory.")]
     public class PackCommand : ICommand
