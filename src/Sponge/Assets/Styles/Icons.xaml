@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingImage x:Key="WindowCloseIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                <GeometryDrawing Brush="{DynamicResource SpongeForegroundLight}" Geometry="F1 M24,24z M0,0z M13.46,12L19,17.54 19,19 17.54,19 12,13.46 6.46,19 5,19 5,17.54 10.54,12 5,6.46 5,5 6.46,5 12,10.54 17.54,5 19,5 19,6.46 13.46,12z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="WindowMaximizeIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                <GeometryDrawing Brush="{DynamicResource SpongeForegroundLight}" Geometry="F1 M24,24z M0,0z M4,4L20,4 20,20 4,20 4,4 M6,8L6,18 18,18 18,8 6,8z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="WindowRestoreIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                <GeometryDrawing Brush="{DynamicResource SpongeForegroundLight}" Geometry="F1 M24,24z M0,0z M4,8L8,8 8,4 20,4 20,16 16,16 16,20 4,20 4,8 M16,8L16,14 18,14 18,6 10,6 10,8 16,8 M6,12L6,18 14,18 14,12 6,12z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="WindowMinimizeIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                <GeometryDrawing Brush="{DynamicResource SpongeForegroundLight}" Geometry="F1 M512,512z M0,0z M32,416C14.3,416 0,430.3 0,448 0,465.7 14.3,480 32,480L480,480C497.7,480 512,465.7 512,448 512,430.3 497.7,416 480,416L32,416z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+</ResourceDictionary>

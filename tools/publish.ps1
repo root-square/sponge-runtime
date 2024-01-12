@@ -1,12 +1,13 @@
 # --------------------------------------------------
-# Sponge Builder
-# Copyright (c) 2023 handbros all rights reserved.
+# .NET Publishing Assistant
+# Copyright (c) 2023 MView Contributors all rights reserved.
 # --------------------------------------------------
 
 [CmdletBinding(PositionalBinding = $false)]
 Param(
     [string][Alias('v')]$verbosity = "minimal",
-    [string][Alias('s')]$source = "",
+    [string][Alias('t')]$target = "",
+	[string][Alias('p')]$publishProfile = "",
     [bool][Alias('e')]$excludeSymbols = $true,
     [switch]$noLogo,
     [switch]$help,
@@ -34,7 +35,7 @@ function Invoke-ExitWithExitCode([int] $exitCode) {
 function Invoke-Help {
     Write-Host "Common settings:"
 	Write-Host "  -verbosity <value>         Msbuild verbosity: q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic] (short: -v)"
-	Write-Host "  -source <value>            Name of a solution or project file to build (short: -s)"
+	Write-Host "  -target <value>            Name of a solution or project file to build (short: -s)"
 	Write-Host "  -publishProfile <value>    Publish profile to use (short: -p)"
 	Write-Host "  -excludeSymbols <value>    If it is true, exclude debug symbols(*.pdb) (short: -e)"
     Write-Host "  -noLogo                    Doesn't display the startup banner or the copyright message"
@@ -56,24 +57,24 @@ function Invoke-Hello {
         return
     }
 	
-	Write-Host "Sponge Builder" -ForegroundColor White
-	Write-Host "Copyright (c) 2023 handbros all rights reserved." -ForegroundColor White
+	Write-Host ".NET Publishing Assistant" -ForegroundColor White
+	Write-Host "Copyright (c) 2023 MView Contributors all rights reserved." -ForegroundColor White
     Write-Host ""
 }
 
 function Initialize-Script {
 	# Check the target
-	if ([string]::IsNullOrEmpty($source) -eq $True) {
+	if ([string]::IsNullOrEmpty($target) -eq $True) {
 		Write-Host "Please specify a target file(solution or project)." -ForegroundColor Red
 		Invoke-ExitWithExitCode 1
 	}
 
-    if ((Test-Path "$($PSScriptRoot)\..\src\$($source)") -eq $False) {
-        Write-Host "Target $($PSScriptRoot)\..\src\$($source) not found." -ForegroundColor Red
+    if ((Test-Path "$($PSScriptRoot)\..\src\$($target)") -eq $False) {
+        Write-Host "Target $($PSScriptRoot)\..\src\$($target) not found." -ForegroundColor Red
         Invoke-ExitWithExitCode 1
     }
 
-    $Script:TargetPath = (Resolve-Path -Path "$($PSScriptRoot)\..\src\$($source)").ToString()
+    $Script:TargetPath = (Resolve-Path -Path "$($PSScriptRoot)\..\src\$($target)").ToString()
 	
 	# Check the publish profile
 	if ([string]::IsNullOrEmpty($publishProfile) -eq $True) {
@@ -101,9 +102,9 @@ function Invoke-Restore {
 
 function Invoke-Publish {
 	if ($excludeSymbols -eq $true) {
-        dotnet publish $Script:TargetPath -p:PublishProfileFullPath=$Script:ProfilePath -p:Configuration=Release -p:DebugType=None -p:DebugSymbols=false -p:Product=$productName -p:Version=$productVersion -p:AssemblyTitle=$fileDesc -p:AssemblyVersion=$fileVersion -p:Company=$company -p:Copyright=$copyright --verbosity $verbosity --no-restore --nologo $properties
+        dotnet publish $Script:TargetPath -p:PublishProfileFullPath=$Script:ProfilePath -p:Configuration=Release -p:DebugType=None -p:DebugSymbols=false -p:Product=$productName -p:Version=$productVersion -p:AssemblyTitle=$fileDesc -p:AssemblyVersion=$fileVersion -p:Company=$company -p:Copyright=$copyright $properties --verbosity $verbosity --no-restore --nologo
     } else {
-		dotnet publish $Script:TargetPath -p:PublishProfileFullPath=$Script:ProfilePath -p:Configuration=Release -p:Product=$productName -p:Version=$productVersion -p:AssemblyTitle=$fileDesc -p:AssemblyVersion=$fileVersion -p:Company=$company -p:Copyright=$copyright --verbosity $verbosity --no-restore --nologo $properties
+		dotnet publish $Script:TargetPath -p:PublishProfileFullPath=$Script:ProfilePath -p:Configuration=Release -p:Product=$productName -p:Version=$productVersion -p:AssemblyTitle=$fileDesc -p:AssemblyVersion=$fileVersion -p:Company=$company -p:Copyright=$copyright $properties --verbosity $verbosity --no-restore --nologo
 	}
 
     if ($lastExitCode -ne 0) {

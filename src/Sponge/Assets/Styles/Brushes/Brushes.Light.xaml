@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Color x:Key="SpongeBackgroundColor">#FFffffff</Color>
+	<SolidColorBrush x:Key="SpongeBackground" Color="{DynamicResource SpongeBackgroundColor}" />
+	<Color x:Key="SpongeSecondaryBackgroundColor">#FFfafafa</Color>
+	<SolidColorBrush x:Key="SpongeSecondaryBackground" Color="{DynamicResource SpongeSecondaryBackgroundColor}" />
+	<Color x:Key="SpongePopupBoxBackgroundColor">#FFF5F5F5</Color>
+	<SolidColorBrush x:Key="SpongePopupBoxBackground" Color="{DynamicResource SpongePopupBoxBackgroundColor}" />
+	<Color x:Key="SpongeProgressBarBackgroundColor">#1F000000</Color>
+	<SolidColorBrush x:Key="SpongeProgressBarBackground" Color="{DynamicResource SpongeProgressBarBackgroundColor}" />
+	<Color x:Key="SpongeCommandBarBackgroundColor">#ffeeeeee</Color>
+	<SolidColorBrush x:Key="SpongeCommandBarBackground" Color="{DynamicResource SpongeDialogCommandBarBackgroundColor}" />
+
+	<Color x:Key="SpongeButtonHoverColor">#FFDeDeDe</Color>
+	<SolidColorBrush x:Key="SpongeButtonHover" Color="{DynamicResource SpongeButtonHoverColor}" />
+	<Color x:Key="SpongeButtonRippleColor">#FFB6B6B6</Color>
+	<SolidColorBrush x:Key="SpongeButtonRipple" Color="{DynamicResource SpongeButtonRippleColor}" />
+
+	<Color x:Key="SpongeForegroundUltraLightColor">#FF717171</Color>
+	<SolidColorBrush x:Key="SpongeForegroundUltraLight" Color="{DynamicResource SpongeForegroundUltraLightColor}" />
+	<Color x:Key="SpongeForegroundLightColor">#BB000000</Color>
+	<SolidColorBrush x:Key="SpongeForegroundLight" Color="{DynamicResource SpongeForegroundLightColor}" />
+	<Color x:Key="SpongeForegroundColor">#CC000000</Color>
+	<SolidColorBrush x:Key="SpongeForeground" Color="{DynamicResource SpongeForegroundColor}" />
+
+	<Color x:Key="SpongeContrastForegroundColor">#DDFFFFFF</Color>
+	<SolidColorBrush x:Key="SpongeContrastForeground" Color="{DynamicResource SpongeContrastForegroundColor}" />
+
+	<Color x:Key="SpongeDividerColor">#1F000000</Color>
+	<SolidColorBrush x:Key="SpongeDivider" Color="{DynamicResource SpongeDividerColor}" />
+	<Color x:Key="SpongeDividerLightColor">#0F000000</Color>
+	<SolidColorBrush x:Key="SpongeDividerLight" Color="{DynamicResource SpongeDividerLightColor}" />
+</ResourceDictionary>
