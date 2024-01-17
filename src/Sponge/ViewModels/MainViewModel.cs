@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sponge.ViewModels
 {
-    internal class ShellViewModel
+    internal class MainViewModel
     {
     }
 }

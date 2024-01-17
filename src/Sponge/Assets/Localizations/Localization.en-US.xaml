@@ -15,4 +15,45 @@
     <system:String x:Key="COMMON_YES">Yes</system:String>
     <system:String x:Key="COMMON_CLOSE">Close</system:String>
     <system:String x:Key="COMMON_COMPLETE">Complete</system:String>
+
+    <!--VIEW : MAIN-->
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE">File</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN">Open</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN_ARCHIVES">Archives</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN_FOLDERS">Folders</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_CLEAR">Clear</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_EXIT">Exit</system:String>
+
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST">List</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_SELECT">Select</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_SELECT_ALL">Select all</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DESELECT">Deselect</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DESELECT_ALL">Deselect all</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_REV_SELECTION">Reverse selection</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DELETE">Delete</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DELETE_ALL">Delete all</system:String>
+
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS">Tools</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_IMGCONV">Image Converter</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_SNDCOMP">Sound Compressor</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_SCREXP">Script Exporter</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_VALIDATOR">Validator</system:String>
+
+    <system:String x:Key="VIEW_MAIN_MENUBAR_SETTINGS">Settings</system:String>
+
+    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP">Help</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_GITHUB">GitHub</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_GUIDE">User-manual</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_INFO">About Sponge</system:String>
+
+    <system:String x:Key="VIEW_MAIN_EXPLORER_IS_EMPTY">Drag and drop your games.</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_ADD">Add</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_DELETE">Delete</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_SELECT_ALL">Select all</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_DESELECT_ALL">Deselect all</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_REVERSE_SEL">Reverse selection</system:String>
+
+    <system:String x:Key="VIEW_MAIN_CONTROLLER_PROFILE">Profile</system:String>
+    <system:String x:Key="VIEW_MAIN_CONTROLLER_PREVIEW_IMG">Preview - Image</system:String>
+    <system:String x:Key="VIEW_MAIN_CONTROLLER_PREVIEW_SND">Preview - Sound</system:String>
 </ResourceDictionary>

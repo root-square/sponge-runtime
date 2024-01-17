@@ -15,4 +15,45 @@
     <system:String x:Key="COMMON_YES">예</system:String>
     <system:String x:Key="COMMON_CLOSE">닫기</system:String>
     <system:String x:Key="COMMON_COMPLETE">완료</system:String>
+
+    <!--VIEW : MAIN-->
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE">파일</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN">열기</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN_ARCHIVES">압축 파일</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN_FOLDERS">폴더</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_CLEAR">초기화</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_EXIT">끝내기</system:String>
+
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST">목록</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_SELECT">선택</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_SELECT_ALL">모두 선택</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DESELECT">선택 해제</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DESELECT_ALL">모두 선택 해제</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_REV_SELECTION">선택 반전</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DELETE">삭제</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DELETE_ALL">모두 삭제</system:String>
+
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS">도구</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_IMGCONV">이미지 변환기</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_SNDCOMP">사운드 압축기</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_SCREXP">스크립트 생성기</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_VALIDATOR">유효성 검사기</system:String>
+
+    <system:String x:Key="VIEW_MAIN_MENUBAR_SETTINGS">설정</system:String>
+
+    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP">도움말</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_GITHUB">GitHub 저장소</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_GUIDE">유저 매뉴얼</system:String>
+    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_INFO">Sponge 정보</system:String>
+
+    <system:String x:Key="VIEW_MAIN_EXPLORER_IS_EMPTY">압축할 게임을 끌어 놓으세요.</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_ADD">추가</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_DELETE">삭제</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_SELECT_ALL">모두 선택</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_DESELECT_ALL">모두 선택 해제</system:String>
+    <system:String x:Key="VIEW_MAIN_EXPLORER_REVERSE_SEL">선택 반전</system:String>
+
+    <system:String x:Key="VIEW_MAIN_CONTROLLER_PROFILE">프로파일</system:String>
+    <system:String x:Key="VIEW_MAIN_CONTROLLER_PREVIEW_IMG">미리보기 - 이미지</system:String>
+    <system:String x:Key="VIEW_MAIN_CONTROLLER_PREVIEW_SND">미리보기 - 사운드</system:String>
 </ResourceDictionary>

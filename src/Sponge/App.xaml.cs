@@ -92,7 +92,7 @@ namespace Sponge
         private void ConfigureServices()
         {
             var services = new ServiceCollection();
-            services.AddSingleton(typeof(ShellViewModel));
+            services.AddSingleton(typeof(MainViewModel));
 
             Services = services.BuildServiceProvider();
         }

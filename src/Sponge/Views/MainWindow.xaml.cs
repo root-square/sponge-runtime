@@ -1,5 +1,4 @@
-﻿using Sponge.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +15,13 @@ using System.Windows.Shapes;
 namespace Sponge.Views
 {
     /// <summary>
-    /// ShellWindow.xaml에 대한 상호 작용 논리
+    /// MainWindow.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class ShellWindow : Window
+    public partial class MainWindow : Window
     {
-        public ShellWindow()
+        public MainWindow()
         {
             InitializeComponent();
-            DataContext = App.Current.Services?.GetService(typeof(ShellViewModel));
         }
     }
 }
