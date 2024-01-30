@@ -151,7 +151,7 @@
                                            TextWrapping="Wrap" Text="{TemplateBinding Title}"/>
 
                                 <Button Grid.Column="1" Style="{DynamicResource SpongeButton}" VerticalAlignment="Top" Height="35" WindowChrome.IsHitTestVisibleInChrome="True" Click="OnMinimize">
-                                    <Image Width="14" Height="14" Source="{DynamicResource WindowMinimizeIcon}"/>
+                                    <Image Width="10" Height="10" Source="{DynamicResource WindowMinimizeIcon}"/>
                                 </Button>
 
                                 <Button Grid.Column="2" Style="{DynamicResource SpongeButton}" VerticalAlignment="Top" Height="35" WindowChrome.IsHitTestVisibleInChrome="True" Click="OnMaximize">
@@ -233,7 +233,7 @@
                                            TextWrapping="Wrap" Text="{TemplateBinding Title}"/>
 
                                 <Button Grid.Column="1" Style="{DynamicResource SpongeButton}" VerticalAlignment="Top" Height="35" WindowChrome.IsHitTestVisibleInChrome="True" Click="OnMinimize">
-                                    <Image Width="14" Height="14" Source="{DynamicResource WindowMinimizeIcon}"/>
+                                    <Image Width="10" Height="10" Source="{DynamicResource WindowMinimizeIcon}"/>
                                 </Button>
 
                                 <Button Grid.Column="2" Style="{DynamicResource SpongeButton}" VerticalAlignment="Top" Height="35" WindowChrome.IsHitTestVisibleInChrome="True" Click="OnClose">

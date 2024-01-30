@@ -11,4 +11,9 @@
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstractions\" />
+    <Folder Include="Functions\" />
+  </ItemGroup>
+
 </Project>

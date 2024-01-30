@@ -17,7 +17,6 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="200"/>
         </Grid.RowDefinitions>
 
         <!--Title Bar-->
@@ -86,235 +85,112 @@
         </Grid>
 
         <!--Content Area-->
-        <Border Grid.Row="2" BorderBrush="{DynamicResource SpongeDivider}" BorderThickness="0 1 0 1">
+        <Border Grid.Row="2" BorderBrush="{DynamicResource SpongeDivider}" BorderThickness="0 0 0 0">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300" MinWidth="300" MaxWidth="500"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="240"/>
+                </Grid.RowDefinitions>
 
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <!--Explorer-->
-                    <Grid Grid.Row="0">
-                        <StackPanel Orientation="Vertical" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <materialDesign:PackIcon Foreground="{DynamicResource SpongeForegroundLight}"
-                                                 HorizontalAlignment="Center" Width="24" Height="24" Kind="CursorDefaultClickOutline"
-                                                 Visibility="{Binding IsEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Foreground="{DynamicResource SpongeForegroundLight}"
-                                   Margin="0 4 0 0"  HorizontalAlignment="Center" FontFamily="Segoe UI" FontSize="12" Text="{DynamicResource VIEW_MAIN_EXPLORER_IS_EMPTY}"
-                                   Visibility="{Binding IsEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                        </StackPanel>
-                        <ListView Background="Transparent" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.IsVirtualizingWhenGrouping="True" VirtualizingPanel.VirtualizationMode="Recycling"
-                              ItemsSource="{Binding IndexedItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
-                              SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              behaviors:DragAndDropFilesBehavior.IsEnabled="True">
-                            <ListView.ItemTemplate>
-                                <DataTemplate DataType="indexing:IndexedItem">
-                                    <StackPanel Orientation="Horizontal">
-                                        <CheckBox Style="{StaticResource MaterialDesignDarkCheckBox}" VerticalAlignment="Center"
-                                              IsChecked="{Binding IsSelected}"/>
-                                        <Image Margin="4 0 0 0" Width="16" Height="16"
-                                           RenderOptions.BitmapScalingMode="HighQuality"
-                                           Source="{Binding FullPath, Converter={StaticResource FileNameToIconConverter}}"/>
-                                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Margin="4 0 0 0" VerticalAlignment="Center"
-                                               FontWeight="Bold"
-                                               Text="{Binding FileName}" />
-                                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Margin="4 0 0 0" VerticalAlignment="Center"
-                                               Text="{Binding SizeString, StringFormat=({0})}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                            <i:Interaction.Behaviors>
-                                <behaviors:ListViewMultiSelectionBehavior SelectedItems="{Binding SelectedItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            </i:Interaction.Behaviors>
-                        </ListView>
-                    </Grid>
+                    <Border Grid.Column="0" BorderBrush="{DynamicResource SpongeDivider}" BorderThickness="1" CornerRadius="8" Margin="16 8 8 8">
+                        <Grid>
+                            <TabControl Grid.Column="2" TabStripPlacement="Top" HorizontalContentAlignment="Left"
+                                    materialDesign:ColorZoneAssist.Mode="PrimaryDark">
+                                <TabControl.Resources>
+                                    <Style TargetType="TabItem" BasedOn="{StaticResource MaterialDesignTabItem}">
+                                        <Setter Property="Height" Value="39"/>
+                                        <Setter Property="Padding" Value="16 0 16 0"/>
+                                        <Setter Property="Margin" Value="0"/>
+                                    </Style>
+                                </TabControl.Resources>
 
-                    <!--Explorer Quick Buttons-->
-                    <Border Grid.Row="1" BorderBrush="{DynamicResource SpongeDividerLight}" BorderThickness="0 1 0 0">
-                        <StackPanel Orientation="Horizontal" Margin="6 0 6 0" HorizontalAlignment="Center">
-                            <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Width="24" Height="24"
-                                ToolTip="{DynamicResource VIEW_MAIN_EXPLORER_ADD}">
-                                <materialDesign:PackIcon Width="16" Height="16" Opacity=".80" Kind="Add" />
-                            </Button>
+                                <TabItem Header="{DynamicResource VIEW_MAIN_CA_EXPLORER}">
+                                    <Border BorderBrush="{DynamicResource SpongeDividerLight}" BorderThickness="0 1 0 0">
+                                        <Grid Background="{DynamicResource SpongeSecondaryBackground}">
 
-                            <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Width="24" Height="24" Margin="4 0 0 0"
-                                ToolTip="{DynamicResource VIEW_MAIN_EXPLORER_DELETE}">
-                                <materialDesign:PackIcon Width="16" Height="16" Opacity=".80" Kind="Remove" />
-                            </Button>
+                                        </Grid>
+                                    </Border>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
+                    </Border>
 
-                            <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Width="24" Height="24" Margin="4 0 0 0"
-                                ToolTip="{DynamicResource VIEW_MAIN_EXPLORER_SELECT_ALL}">
-                                <materialDesign:PackIcon Width="16" Height="16" Opacity=".80" Kind="SelectAll" />
-                            </Button>
+                    <GridSplitter Grid.Column="1" Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="1"
+                                  ShowsPreview="True"/>
 
-                            <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Width="24" Height="24" Margin="4 0 0 0"
-                                ToolTip="{DynamicResource VIEW_MAIN_EXPLORER_DESELECT_ALL}">
-                                <materialDesign:PackIcon Width="16" Height="16" Opacity=".80" Kind="SelectOff" />
-                            </Button>
+                    <Border Grid.Column="2" BorderBrush="{DynamicResource SpongeDivider}" BorderThickness="1" CornerRadius="8" Margin="8 8 16 8">
+                        <Grid>
+                            <TabControl Grid.Column="2" TabStripPlacement="Top" HorizontalContentAlignment="Left"
+                                    materialDesign:ColorZoneAssist.Mode="PrimaryDark">
+                                <TabControl.Resources>
+                                    <Style TargetType="TabItem" BasedOn="{StaticResource MaterialDesignTabItem}">
+                                        <Setter Property="Height" Value="39"/>
+                                        <Setter Property="Padding" Value="16 0 16 0"/>
+                                        <Setter Property="Margin" Value="0"/>
+                                    </Style>
+                                </TabControl.Resources>
 
-                            <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Width="24" Height="24" Margin="4 0 0 0"
-                                ToolTip="{DynamicResource VIEW_MAIN_EXPLORER_REVERSE_SEL}">
-                                <materialDesign:PackIcon Width="16" Height="16" Opacity=".80" Kind="Exchange" />
-                            </Button>
-                        </StackPanel>
+                                <TabItem Header="{DynamicResource VIEW_MAIN_CA_PROFILE}">
+                                    <Border BorderBrush="{DynamicResource SpongeDividerLight}" BorderThickness="0 1 0 0">
+                                        <Grid Background="{DynamicResource SpongeSecondaryBackground}">
+
+                                        </Grid>
+                                    </Border>
+                                </TabItem>
+
+                                <TabItem Header="{DynamicResource VIEW_MAIN_CA_PRESET}">
+                                    <Border BorderBrush="{DynamicResource SpongeDividerLight}" BorderThickness="0 1 0 0">
+                                        <Grid Background="{DynamicResource SpongeSecondaryBackground}">
+
+                                        </Grid>
+                                    </Border>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
                     </Border>
                 </Grid>
 
-                <GridSplitter Grid.Column="1" Width="1" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+                <GridSplitter Grid.Row="1" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="1"/>
 
-                <!--Controller-->
-                <TabControl Grid.Column="2" TabStripPlacement="Bottom"
-                        materialDesign:ColorZoneAssist.Mode="PrimaryDark">
-                    <TabControl.Resources>
-                        <Style TargetType="TabItem" BasedOn="{StaticResource MaterialDesignTabItem}">
-                            <Setter Property="Height" Value="39"/>
-                            <Setter Property="Padding" Value="0 0 0 0"/>
-                            <Setter Property="Margin" Value="0"/>
-                        </Style>
-                    </TabControl.Resources>
+                <Border Grid.Row="2" BorderBrush="{DynamicResource SpongeDivider}" BorderThickness="1" CornerRadius="8" Margin="16 8 16 16">
+                    <Grid>
+                        <TabControl Grid.Column="2" TabStripPlacement="Top" HorizontalContentAlignment="Left"
+                                    materialDesign:ColorZoneAssist.Mode="PrimaryDark">
+                            <TabControl.Resources>
+                                <Style TargetType="TabItem" BasedOn="{StaticResource MaterialDesignTabItem}">
+                                    <Setter Property="Height" Value="39"/>
+                                    <Setter Property="Padding" Value="16 0 16 0"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                </Style>
+                            </TabControl.Resources>
 
-                    <TabItem Header="{DynamicResource VIEW_MAIN_CONTROLLER_PROFILE}">
-                        <Border BorderBrush="{DynamicResource SpongeDividerLight}" BorderThickness="0 0 0 1">
-                            <Grid Background="{DynamicResource SpongeSecondaryBackground}">
+                            <TabItem Header="{DynamicResource VIEW_MAIN_CA_INFO}">
+                                <Border BorderBrush="{DynamicResource SpongeDividerLight}" BorderThickness="0 1 0 0">
+                                    <Grid Background="{DynamicResource SpongeSecondaryBackground}">
 
-                            </Grid>
-                        </Border>
-                    </TabItem>
+                                    </Grid>
+                                </Border>
+                            </TabItem>
 
-                    <TabItem Header="{DynamicResource VIEW_MAIN_CONTROLLER_PREVIEW_IMG}">
-                        <Border BorderBrush="{DynamicResource SpongeDividerLight}" BorderThickness="0 0 0 1">
-                            <Grid Background="{DynamicResource SpongeSecondaryBackground}">
+                            <TabItem Header="{DynamicResource VIEW_MAIN_CA_PROGRESS}">
+                                <Border BorderBrush="{DynamicResource SpongeDividerLight}" BorderThickness="0 1 0 0">
+                                    <Grid Background="{DynamicResource SpongeSecondaryBackground}">
 
-                            </Grid>
-                        </Border>
-                    </TabItem>
-
-                    <TabItem Header="{DynamicResource VIEW_MAIN_CONTROLLER_PREVIEW_SND}">
-                        <Border BorderBrush="{DynamicResource SpongeDividerLight}" BorderThickness="0 0 0 1">
-                            <Grid Background="{DynamicResource SpongeSecondaryBackground}">
-                                <TextBox BorderBrush="Transparent" FontFamily="Segoe UI" FontSize="14" FontWeight="SemiBold"
-                                     materialDesign:TextFieldAssist.TextBoxViewMargin="12 0 12 0"
-                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                                     AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="False" VerticalScrollBarVisibility="Auto"/>
-                            </Grid>
-                        </Border>
-                    </TabItem>
-                </TabControl>
+                                    </Grid>
+                                </Border>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
-
-        <!--Controller-->
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="300"/>
-            </Grid.ColumnDefinitions>
-
-            <!--Options-->
-            <StackPanel Grid.Column="0" Margin="20 10 20 10" VerticalAlignment="Center">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Column="0" Style="{StaticResource MaterialDesignOutlinedTextBox}" Height="30" Padding="8 4 8 4"
-                         Background="Transparent" BorderBrush="{DynamicResource SpongeDivider}"
-                         materialDesign:HintAssist.Foreground="{DynamicResource SpongeForegroundLight}"
-                         materialDesign:HintAssist.Hint="{DynamicResource CONTROLLER_KEY}"
-                         materialDesign:TextFieldAssist.HasClearButton="True"
-                         Text="{Binding Settings.EncryptionKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    </TextBox>
-
-                    <Button Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedDarkButton}" Margin="6 0 0 0" Width="50" Height="30"
-                        Content="{DynamicResource COMMON_EXPLORE}"/>
-                </Grid>
-
-                <Grid Margin="0 6 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Column="0" Style="{StaticResource MaterialDesignOutlinedTextBox}" Height="30" Padding="8 4 8 4"
-                         Background="Transparent" BorderBrush="{DynamicResource SpongeDivider}"
-                         materialDesign:HintAssist.Foreground="{DynamicResource SpongeForegroundLight}"
-                         materialDesign:HintAssist.Hint="{DynamicResource CONTROLLER_OUTPUT_PATH}"
-                         materialDesign:TextFieldAssist.HasClearButton="True"
-                         Text="{Binding Settings.OutputPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    </TextBox>
-
-                    <Button Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedDarkButton}" Margin="6 0 0 0" Width="50" Height="30"
-                        Content="{DynamicResource COMMON_EXPLORE}" />
-                </Grid>
-
-                <StackPanel Orientation="Horizontal" Margin="0 8 0 0">
-                    <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Margin="0 0 8 0" FontWeight="Bold" Text="{DynamicResource CONTROLLER_TYPE}" />
-                    <RadioButton Style="{StaticResource MaterialDesignDarkRadioButton}" Margin="0 0 8 0" Content="{DynamicResource CONTROLLER_TYPE_RMMV}"
-                             IsChecked="{Binding Settings.UseRMMV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <RadioButton Style="{StaticResource MaterialDesignDarkRadioButton}" Margin="0 0 8 0" Content="{DynamicResource CONTROLLER_TYPE_RMMZ}"
-                             IsChecked="{Binding Settings.UseRMMV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanConverter}}"/>
-                </StackPanel>
-
-                <WrapPanel Margin="0 4 0 0">
-                    <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}" Margin="0 0 8 0" FontWeight="Bold" Text="{DynamicResource CONTROLLER_OPTIONS}" />
-                    <CheckBox Style="{StaticResource MaterialDesignDarkCheckBox}" Margin="0 0 8 0" Content="{DynamicResource CONTROLLER_OPTIONS_REMINPUT}"
-                          IsChecked="{Binding Settings.RememberInputs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <CheckBox Style="{StaticResource MaterialDesignDarkCheckBox}" Margin="0 0 8 0" Content="{DynamicResource CONTROLLER_OPTIONS_TOSOURCE}"
-                          IsChecked="{Binding Settings.OutputToSourcePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <CheckBox Style="{StaticResource MaterialDesignDarkCheckBox}" Margin="0 0 8 0" Content="{DynamicResource CONTROLLER_OPTIONS_ENCALL}"
-                          IsChecked="{Binding Settings.EncryptAllFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <CheckBox Style="{StaticResource MaterialDesignDarkCheckBox}" Margin="0 0 8 0" Content="{DynamicResource CONTROLLER_OPTIONS_COPYUNENC}"
-                          IsChecked="{Binding Settings.CopyUnencryptedFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <CheckBox Style="{StaticResource MaterialDesignDarkCheckBox}" Margin="0 0 8 0" Content="{DynamicResource CONTROLLER_OPTIONS_INFEREXT}"
-                          IsChecked="{Binding Settings.InferExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </WrapPanel>
-            </StackPanel>
-
-            <!--Divider-->
-            <Rectangle Grid.Column="1" Fill="{DynamicResource SpongeDividerLight}" Width="3" Height="100" RadiusX="2" RadiusY="2"/>
-
-            <!--Progress/Start/Stop-->
-            <Grid Grid.Column="2" Margin="20 10 20 10">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Completed"/>
-
-                    <Border Background="{DynamicResource SpongeBackground}" CornerRadius="4" Margin="0 4 0 0">
-                        <ProgressBar Background="{DynamicResource SpongeDividerLight}" BorderThickness="0"
-                                 ClipToBounds="True" Height="8" IsIndeterminate="False" />
-                    </Border>
-
-                    <Grid Margin="0 8 0 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Button Grid.Column="0" Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                        Margin="0 0 2 0"
-                        materialDesign:ElevationAssist.Elevation="Dp0"
-                        Content="{DynamicResource CONTROLLER_ENCRYPT}"/>
-
-                        <Button Grid.Column="1" Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                        Margin="2 0 0 0"
-                        materialDesign:ElevationAssist.Elevation="Dp0"
-                        Content="{DynamicResource CONTROLLER_DECRYPT}"/>
-                    </Grid>
-
-                    <Button Style="{StaticResource MaterialDesignOutlinedDarkButton}"
-                        Margin="0 4 0 0"
-                        materialDesign:ElevationAssist.Elevation="Dp0"
-                        Content="{DynamicResource CONTROLLER_STOP}"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
     </Grid>
 </Window>
