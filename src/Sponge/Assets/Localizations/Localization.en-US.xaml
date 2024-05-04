@@ -16,36 +16,22 @@
     <system:String x:Key="COMMON_CLOSE">Close</system:String>
     <system:String x:Key="COMMON_COMPLETE">Complete</system:String>
 
-    <!--VIEW : MAIN-->
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE">File(F)</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN">Open</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN_ARCHIVES">Archives</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN_FOLDERS">Folders</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_CLEAR">Clear</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_EXIT">Exit</system:String>
+    <!--CONTAINER-->
+    <system:Double x:Key="CONTAINER_FONT_SIZE">11</system:Double>
+    <system:String x:Key="CONTAINER_ENCODER">Encoder</system:String>
+    <system:String x:Key="CONTAINER_DECODER">Decoder</system:String>
+    <system:String x:Key="CONTAINER_UTILITIES">Utils</system:String>
+    <system:String x:Key="CONTAINER_SETTINGS">Settings</system:String>
 
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST">List(L)</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_SELECT">Select</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_SELECT_ALL">Select all</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DESELECT">Deselect</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DESELECT_ALL">Deselect all</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_REV_SELECTION">Reverse selection</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DELETE">Delete</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DELETE_ALL">Delete all</system:String>
+    <!--ENCODER-->
+    <system:String x:Key="ENCODER_HEADER">Encoder</system:String>
 
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS">Tools(T)</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_IMGCONV">Image Converter</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_SNDCOMP">Sound Compressor</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_SCREXP">Script Exporter</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_VALIDATOR">Validator</system:String>
+    <!--DECODER-->
+    <system:String x:Key="DECODER_HEADER">Decoder</system:String>
 
-    <system:String x:Key="VIEW_MAIN_MENUBAR_SETTINGS">Settings(S)</system:String>
+    <!--UTILITIES-->
+    <system:String x:Key="UTILITIES_HEADER">Utils</system:String>
 
-    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP">Help(H)</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_GITHUB">GitHub</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_GUIDE">User-manual</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_INFO">About Sponge</system:String>
-
-    <system:String x:Key="VIEW_MAIN_CA_INFO">정보</system:String>
-    <system:String x:Key="VIEW_MAIN_CA_PROGRESS">진행 상황</system:String>
+    <!--SETTINGS-->
+    <system:String x:Key="SETTINGS_HEADER">Settings</system:String>
 </ResourceDictionary>

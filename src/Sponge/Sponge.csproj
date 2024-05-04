@@ -60,4 +60,8 @@
     </Page>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\Pages\" />
+  </ItemGroup>
+
 </Project>

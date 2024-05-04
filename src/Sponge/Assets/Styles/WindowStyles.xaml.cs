@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Sponge.Assets.Styles
 {
-    public partial class Windows : ResourceDictionary
+    public partial class WindowStyles : ResourceDictionary
     {
         [StructLayout(LayoutKind.Sequential)]
         protected struct POINT

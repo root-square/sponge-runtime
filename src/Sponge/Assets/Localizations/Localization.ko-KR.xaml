@@ -15,42 +15,23 @@
     <system:String x:Key="COMMON_YES">예</system:String>
     <system:String x:Key="COMMON_CLOSE">닫기</system:String>
     <system:String x:Key="COMMON_COMPLETE">완료</system:String>
-
-    <!--VIEW : MAIN-->
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE">파일(F)</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN">열기</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN_ARCHIVES">파일</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_OPEN_FOLDERS">폴더</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_CLEAR">초기화</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_FILE_EXIT">끝내기</system:String>
-
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST">목록(L)</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_SELECT">선택</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_SELECT_ALL">모두 선택</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DESELECT">선택 해제</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DESELECT_ALL">모두 선택 해제</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_REV_SELECTION">선택 반전</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DELETE">삭제</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_LIST_DELETE_ALL">모두 삭제</system:String>
-
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS">도구(T)</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_IMGCONV">이미지 변환기</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_SNDCOMP">사운드 압축기</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_SCREXP">스크립트 생성기</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_TOOLS_VALIDATOR">유효성 검사기</system:String>
-
-    <system:String x:Key="VIEW_MAIN_MENUBAR_SETTINGS">설정(S)</system:String>
-
-    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP">도움말(H)</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_GITHUB">GitHub 저장소</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_GUIDE">유저 매뉴얼</system:String>
-    <system:String x:Key="VIEW_MAIN_MENUBAR_HELP_INFO">Sponge 정보</system:String>
-
-    <system:String x:Key="VIEW_MAIN_CA_EXPLORER">탐색기</system:String>
     
-    <system:String x:Key="VIEW_MAIN_CA_PROFILE">프로파일</system:String>
-    <system:String x:Key="VIEW_MAIN_CA_PRESET">프리셋</system:String>
+    <!--CONTAINER-->
+    <system:Double x:Key="CONTAINER_FONT_SIZE">11</system:Double>
+    <system:String x:Key="CONTAINER_ENCODER">인코더</system:String>
+    <system:String x:Key="CONTAINER_DECODER">디코더</system:String>
+    <system:String x:Key="CONTAINER_UTILITIES">도구</system:String>
+    <system:String x:Key="CONTAINER_SETTINGS">설정</system:String>
     
-    <system:String x:Key="VIEW_MAIN_CA_INFO">정보</system:String>
-    <system:String x:Key="VIEW_MAIN_CA_PROGRESS">진행 상황</system:String>
+    <!--ENCODER-->
+    <system:String x:Key="ENCODER_HEADER">인코더</system:String>
+
+    <!--DECODER-->
+    <system:String x:Key="DECODER_HEADER">디코더</system:String>
+
+    <!--UTILITIES-->
+    <system:String x:Key="UTILITIES_HEADER">도구</system:String>
+
+    <!--SETTINGS-->
+    <system:String x:Key="SETTINGS_HEADER">설정</system:String>
 </ResourceDictionary>

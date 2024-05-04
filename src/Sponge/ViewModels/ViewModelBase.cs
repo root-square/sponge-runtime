@@ -14,28 +14,6 @@ namespace Sponge.ViewModels
     /// </summary>
     public abstract class ViewModelBase : ObservableObject, INavigationAware
     {
-        private string _title = string.Empty;
-
-        /// <summary>
-        /// The title of the view.
-        /// </summary>
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
-
-        private string _description = string.Empty;
-
-        /// <summary>
-        /// A description for the view.
-        /// </summary>
-        public string Description
-        {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
-        }
-
         /// <summary>
         /// The event that occur at the start of a frame navigation.
         /// </summary>

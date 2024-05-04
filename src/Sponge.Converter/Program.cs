@@ -1,4 +1,4 @@
-﻿namespace Sponge.Processor
+﻿namespace Sponge.Converter
 {
     internal class Program
     {

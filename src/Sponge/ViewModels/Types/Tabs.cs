@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.ViewModels
+namespace Sponge.ViewModels.Types
 {
-    internal class MainViewModel
+    public enum Tabs
     {
+        Encoder,
+        Decoder,
+        Utilities,
+        Settings
     }
 }

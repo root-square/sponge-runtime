@@ -7,20 +7,12 @@
     <Nullable>enable</Nullable>
     <PublishAot>true</PublishAot>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <Platforms>AnyCPU;x86;x64</Platforms>
-    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="BitFaster.Caching" Version="2.4.1" />
-    <PackageReference Include="NetVips" Version="2.4.0" />
-    <PackageReference Include="NetVips.Native.win-x64" Version="8.15.1" />
-    <PackageReference Include="NetVips.Native.win-x86" Version="8.15.1" />
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Abstractions\" />
     <Folder Include="Functions\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>
