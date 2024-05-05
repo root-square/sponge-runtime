@@ -22,7 +22,7 @@ namespace Sponge.ViewModels
             set => SetProperty(ref _containerSource, value);
         }
 
-        private Tabs _containerTab = Tabs.Encoder;
+        private Tabs _containerTab = Tabs.Task;
 
         public Tabs ContainerTab
         {
@@ -46,7 +46,7 @@ namespace Sponge.ViewModels
         private void InitializeComponent()
         {
             // Sets the intial page.
-            ContainerSource = "./Views/Pages/EncoderPage.xaml";
+            ContainerSource = "./Views/Pages/TaskPage.xaml";
 
             // Subscribes the messenger to get navigation messages.
             WeakReferenceMessenger.Default.Register<NavigationMessage>(this, (recipient, message) =>
@@ -65,20 +65,17 @@ namespace Sponge.ViewModels
 
             switch (_containerTab)
             {
-                case Tabs.Encoder:
-                    source = "./Views/Pages/EncoderPage.xaml";
+                case Tabs.Task:
+                    source = "./Views/Pages/TaskPage.xaml";
                     break;
-                case Tabs.Decoder:
-                    source = "./Views/Pages/DecoderPage.xaml";
+                case Tabs.Log:
+                    source = "./Views/Pages/LogPage.xaml";
                     break;
-                case Tabs.Utilities:
-                    source = "./Views/Pages/UtilitiesPage.xaml";
+                case Tabs.Tools:
+                    source = "./Views/Pages/ToolsPage.xaml";
                     break;
                 case Tabs.Settings:
                     source = "./Views/Pages/SettingsPage.xaml";
-                    break;
-                default:
-                    source = "./Views/Pages/AlertPage.xaml";
                     break;
             }
 

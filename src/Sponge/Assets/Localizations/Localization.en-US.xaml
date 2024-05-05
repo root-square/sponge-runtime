@@ -18,19 +18,19 @@
 
     <!--CONTAINER-->
     <system:Double x:Key="CONTAINER_FONT_SIZE">11</system:Double>
-    <system:String x:Key="CONTAINER_ENCODER">Encoder</system:String>
-    <system:String x:Key="CONTAINER_DECODER">Decoder</system:String>
-    <system:String x:Key="CONTAINER_UTILITIES">Utils</system:String>
+    <system:String x:Key="CONTAINER_TASK">Task</system:String>
+    <system:String x:Key="CONTAINER_LOG">Log</system:String>
+    <system:String x:Key="CONTAINER_TOOLS">Tools</system:String>
     <system:String x:Key="CONTAINER_SETTINGS">Settings</system:String>
 
-    <!--ENCODER-->
-    <system:String x:Key="ENCODER_HEADER">Encoder</system:String>
+    <!--TASK-->
+    <system:String x:Key="TASK_HEADER">Task</system:String>
 
-    <!--DECODER-->
-    <system:String x:Key="DECODER_HEADER">Decoder</system:String>
+    <!--LOG-->
+    <system:String x:Key="LOG_HEADER">Log</system:String>
 
-    <!--UTILITIES-->
-    <system:String x:Key="UTILITIES_HEADER">Utils</system:String>
+    <!--TOOLS-->
+    <system:String x:Key="TOOLS_HEADER">Tools</system:String>
 
     <!--SETTINGS-->
     <system:String x:Key="SETTINGS_HEADER">Settings</system:String>

@@ -8,9 +8,9 @@ namespace Sponge.ViewModels.Types
 {
     public enum Tabs
     {
-        Encoder,
-        Decoder,
-        Utilities,
+        Task,
+        Log,
+        Tools,
         Settings
     }
 }

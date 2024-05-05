@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Sponge.Views.Pages
 {
     /// <summary>
-    /// UtilitiesPage.xaml에 대한 상호 작용 논리
+    /// TaskPage.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class UtilitiesPage : Page
+    public partial class TaskPage : Page
     {
-        public UtilitiesPage()
+        public TaskPage()
         {
             InitializeComponent();
         }

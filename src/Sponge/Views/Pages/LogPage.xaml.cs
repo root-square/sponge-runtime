@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Sponge.Views.Pages
 {
     /// <summary>
-    /// EncoderPage.xaml에 대한 상호 작용 논리
+    /// LogPage.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class EncoderPage : Page
+    public partial class LogPage : Page
     {
-        public EncoderPage()
+        public LogPage()
         {
             InitializeComponent();
         }

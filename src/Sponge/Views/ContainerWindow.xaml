@@ -73,40 +73,38 @@
                     </StackPanel.Resources>
 
                     <RadioButton Style="{StaticResource SpongeLeftTabRadioButton}" Margin="8 0 8 4" Padding="0"
-                                 ToolTip="{DynamicResource CONTAINER_ENCODER}"
+                                 ToolTip="{DynamicResource CONTAINER_TASK}"
                                  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanConverter}}"
-                                 IsChecked="{Binding ContainerTab, Mode=TwoWay, Converter={StaticResource BooleanToEnumConverter}, ConverterParameter=Encoder}">
+                                 IsChecked="{Binding ContainerTab, Mode=TwoWay, Converter={StaticResource BooleanToEnumConverter}, ConverterParameter=Task}">
                         <StackPanel>
-                            <materialDesign:PackIcon Style="{StaticResource SpongeTabPackIcon}" HorizontalAlignment="Center" Kind="ArchiveArrowDownOutline"/>
+                            <materialDesign:PackIcon Style="{StaticResource SpongeTabPackIcon}" HorizontalAlignment="Center" Kind="FolderZipOutline"/>
                             <TextBlock Style="{StaticResource SpongeTabTextBlock}" Margin="0 2 0 0" HorizontalAlignment="Center" TextWrapping="Wrap"
                                        TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType" FontSize="{DynamicResource CONTAINER_FONT_SIZE}"
-                                       Text="{DynamicResource CONTAINER_ENCODER}"/>
+                                       Text="{DynamicResource CONTAINER_TASK}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource SpongeLeftTabRadioButton}" Margin="8 4 8 4" Padding="0"
+                                 ToolTip="{DynamicResource CONTAINER_LOG}"
+                                 IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanConverter}}"
+                                 IsChecked="{Binding ContainerTab, Mode=TwoWay, Converter={StaticResource BooleanToEnumConverter}, ConverterParameter=Log}">
+                        <StackPanel>
+                            <materialDesign:PackIcon Style="{StaticResource SpongeTabPackIcon}" HorizontalAlignment="Center" Kind="ConsoleLine"/>
+                            <TextBlock Style="{StaticResource SpongeTabTextBlock}" Margin="0 2 0 0" HorizontalAlignment="Center" TextWrapping="Wrap"
+                                       TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType" FontSize="{DynamicResource CONTAINER_FONT_SIZE}"
+                                       Text="{DynamicResource CONTAINER_LOG}"/>
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource SpongeLeftTabRadioButton}" Margin="8 4 8 8" Padding="0"
-                                 ToolTip="{DynamicResource CONTAINER_DECODER}"
+                                 ToolTip="{DynamicResource CONTAINER_TOOLS}"
                                  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanConverter}}"
-                                 IsChecked="{Binding ContainerTab, Mode=TwoWay, Converter={StaticResource BooleanToEnumConverter}, ConverterParameter=Decoder}">
-                        <StackPanel>
-                            <materialDesign:PackIcon Style="{StaticResource SpongeTabPackIcon}" HorizontalAlignment="Center" Kind="ArchiveArrowUpOutline"/>
-                            <TextBlock Style="{StaticResource SpongeTabTextBlock}" Margin="0 2 0 0" HorizontalAlignment="Center" TextWrapping="Wrap"
-                                       TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType" FontSize="{DynamicResource CONTAINER_FONT_SIZE}"
-                                       Text="{DynamicResource CONTAINER_DECODER}"/>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <Separator Foreground="{DynamicResource SpongeDividerLight}" Margin="16 0 16 0" Opacity=".20"/>
-
-                    <RadioButton Style="{StaticResource SpongeLeftTabRadioButton}" Margin="8 8 8 8" Padding="0"
-                                 ToolTip="{DynamicResource CONTAINER_UTILITIES}"
-                                 IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanConverter}}"
-                                 IsChecked="{Binding ContainerTab, Mode=TwoWay, Converter={StaticResource BooleanToEnumConverter}, ConverterParameter=Utilities}">
+                                 IsChecked="{Binding ContainerTab, Mode=TwoWay, Converter={StaticResource BooleanToEnumConverter}, ConverterParameter=Tools}">
                         <StackPanel>
                             <materialDesign:PackIcon Style="{StaticResource SpongeTabPackIcon}" HorizontalAlignment="Center" Kind="WrenchOutline"/>
                             <TextBlock Style="{StaticResource SpongeTabTextBlock}" Margin="0 2 0 0" HorizontalAlignment="Center" TextWrapping="Wrap"
                                        TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType" FontSize="{DynamicResource CONTAINER_FONT_SIZE}"
-                                       Text="{DynamicResource CONTAINER_UTILITIES}"/>
+                                       Text="{DynamicResource CONTAINER_TOOLS}"/>
                         </StackPanel>
                     </RadioButton>
                 </StackPanel>

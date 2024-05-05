@@ -18,19 +18,19 @@
     
     <!--CONTAINER-->
     <system:Double x:Key="CONTAINER_FONT_SIZE">11</system:Double>
-    <system:String x:Key="CONTAINER_ENCODER">인코더</system:String>
-    <system:String x:Key="CONTAINER_DECODER">디코더</system:String>
-    <system:String x:Key="CONTAINER_UTILITIES">도구</system:String>
+    <system:String x:Key="CONTAINER_TASK">작업</system:String>
+    <system:String x:Key="CONTAINER_LOG">로그</system:String>
+    <system:String x:Key="CONTAINER_TOOLS">도구</system:String>
     <system:String x:Key="CONTAINER_SETTINGS">설정</system:String>
     
-    <!--ENCODER-->
-    <system:String x:Key="ENCODER_HEADER">인코더</system:String>
+    <!--TASK-->
+    <system:String x:Key="TASK_HEADER">작업</system:String>
 
-    <!--DECODER-->
-    <system:String x:Key="DECODER_HEADER">디코더</system:String>
+    <!--LOG-->
+    <system:String x:Key="LOG_HEADER">로그</system:String>
 
-    <!--UTILITIES-->
-    <system:String x:Key="UTILITIES_HEADER">도구</system:String>
+    <!--TOOLS-->
+    <system:String x:Key="TOOLS_HEADER">도구</system:String>
 
     <!--SETTINGS-->
     <system:String x:Key="SETTINGS_HEADER">설정</system:String>
