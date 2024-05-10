@@ -39,8 +39,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Functions\Processing\" />
-    <Folder Include="Services\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Services\Internals\VIPS\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Agent.Functions.Checksum
+namespace Sponge.Agent.Services.Internals.CRC
 {
     /// <summary>
     /// Implementation of CRC-16(ANSI/MODBUS).
