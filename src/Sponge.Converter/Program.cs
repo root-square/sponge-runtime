@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using Sponge.Agent.Utilities;
 using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
@@ -28,7 +29,7 @@ namespace Sponge.Agent
 
         private static void InitializeSerilog()
         {
-            string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"logs\.log");
+            string fileName = Path.Combine(VariableBuilder.GetBaseDirectory(), @"logs\.log");
             string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u3}] {Message}{NewLine}{Exception}";
 
             var log = new LoggerConfiguration()
