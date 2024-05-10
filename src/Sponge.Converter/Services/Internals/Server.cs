@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Agent
+namespace Sponge.Agent.Services.Internals
 {
     class Server : HttpServer
     {

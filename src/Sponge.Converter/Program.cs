@@ -1,12 +1,7 @@
 ﻿using Serilog;
 using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
 using Sponge.Agent.Utilities;
-using System.Collections.Concurrent;
 using System.Net;
-using System.Net.Sockets;
-using System.Reflection;
-using System.Text;
 
 namespace Sponge.Agent
 {
@@ -17,7 +12,7 @@ namespace Sponge.Agent
             Signature();
             InitializeSerilog();
             InitializeNetVips();
-            InitializeSystem();
+            InitializeServices();
         }
 
         private static void Signature()
@@ -98,6 +93,11 @@ namespace Sponge.Agent
             Log.Information("Server stopping...");
             server.Stop();
             Log.Information("Done!");
+        }
+
+        private static void InitializeServices()
+        {
+
         }
     }
 }
