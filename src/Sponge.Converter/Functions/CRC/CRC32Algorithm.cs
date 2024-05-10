@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Agent.Services.Internals.CRC
+namespace Sponge.Agent.Functions.CRC
 {
     /// <summary>
     /// Implementation of CRC-32.
