@@ -1,40 +1,81 @@
-﻿using NetCoreServer;
+﻿using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 
-namespace Sponge.Converter
+namespace Sponge.Agent
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            // HTTP server port
-            int port = 8080;
-            if (args.Length > 0)
-                port = int.Parse(args[0]);
-            // HTTP server content path
-            string www = "../../../../../www/api";
-            if (args.Length > 1)
-                www = args[1];
+            Signature();
+            InitializeSerilog();
+            InitializeNetVips();
+            InitializeSystem();
+        }
 
-            Console.WriteLine($"HTTP server port: {port}");
-            Console.WriteLine($"HTTP server static content path: {www}");
-            Console.WriteLine($"HTTP server website: http://localhost:{port}/api/index.html");
-
+        private static void Signature()
+        {
+            Console.WriteLine($"Sponge Agent");
+            Console.WriteLine($"Copyright (c) 2024 Sponge Contributors all rights reserved.");
             Console.WriteLine();
+        }
+
+        private static void InitializeSerilog()
+        {
+            string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"logs\.log");
+            string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u3}] {Message}{NewLine}{Exception}";
+
+            var log = new LoggerConfiguration()
+                .WriteTo.Async(sink => sink.Console(restrictedToMinimumLevel: LogEventLevel.Verbose, outputTemplate: outputTemplateString))
+                .WriteTo.Async(sink => sink.File(fileName, restrictedToMinimumLevel: LogEventLevel.Warning, shared: true, outputTemplate: outputTemplateString, rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true, fileSizeLimitBytes: 10485760))
+                .CreateLogger();
+
+            Log.Logger = log;
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                var exception = e.ExceptionObject as Exception;
+                Log.Fatal(exception ?? new Exception("Failed to load the exception information."), "An unhandled exception has occurred.");
+                Log.CloseAndFlush();
+            };
+        }
+
+        private static void InitializeNetVips()
+        {
+            NetVips.ModuleInitializer.Initialize();
+
+            if (!NetVips.ModuleInitializer.VipsInitialized)
+            {
+                Log.Fatal(NetVips.ModuleInitializer.Exception, "Unable to load NetVips components.");
+                Log.CloseAndFlush();
+                Environment.Exit(2); // ENOENT: No such file or directory.
+            }
+        }
+
+        private static void InitializeSystem()
+        {
+            int port = 40126;
+
+            Log.Information($"HTTP server port: {port}");
+            Log.Information($"HTTP server website: http://localhost:{port}/api/index.html");
+
 
             // Create a new HTTP server
             var server = new Server(IPAddress.Any, port);
-            server.AddStaticContent(www, "/api");
+            //server.AddStaticContent(www, "/api");
 
             // Start the server
-            Console.Write("Server starting...");
+            Log.Information("Server starting...");
             server.Start();
-            Console.WriteLine("Done!");
+            Log.Information("Done!");
 
-            Console.WriteLine("Press Enter to stop the server or '!' to restart the server...");
+            Log.Information("Press Enter to stop the server or '!' to restart the server...");
 
             // Perform text input
             for (; ; )
@@ -46,16 +87,16 @@ namespace Sponge.Converter
                 // Restart the server
                 if (line == "!")
                 {
-                    Console.Write("Server restarting...");
+                    Log.Information("Server restarting...");
                     server.Restart();
-                    Console.WriteLine("Done!");
+                    Log.Information("Done!");
                 }
             }
 
             // Stop the server
-            Console.Write("Server stopping...");
+            Log.Information("Server stopping...");
             server.Stop();
-            Console.WriteLine("Done!");
+            Log.Information("Done!");
         }
     }
 }

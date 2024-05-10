@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Converter.Functions.CRC
+namespace Sponge.Agent.Functions.Checksum
 {
     internal class SafeProxy
     {

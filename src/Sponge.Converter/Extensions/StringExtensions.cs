@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Converter.Extensions
+namespace Sponge.Agent.Extensions
 {
     /// <summary>
     /// String extensions utility class.

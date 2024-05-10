@@ -1,12 +1,15 @@
 ﻿using NetCoreServer;
+using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
-namespace Sponge.Converter
+namespace Sponge.Agent
 {
     class Session : HttpSession
     {
@@ -14,12 +17,31 @@ namespace Sponge.Converter
 
         protected override void OnReceivedRequest(HttpRequest request)
         {
-            // Show HTTP request content
-            Console.WriteLine(request);
+            var path = request.Url.IndexOf("?") == -1 ? request.Url : request.Url.Substring(0, request.Url.IndexOf("?"));
+            var queries = HttpUtility.ParseQueryString(request.Url);
 
-            // Process HTTP request methods
-            if (request.Method == "HEAD")
-                SendResponseAsync(Response.MakeHeadResponse());
+            switch (request.Method)
+            {
+                case "HEAD":
+                    SendResponseAsync(Response.MakeHeadResponse());
+                    break;
+                case "TRACE":
+                    SendResponseAsync(Response.MakeTraceResponse(request.Cache.Data));
+                    break;
+                case "OPTIONS":
+                    SendResponseAsync(Response.MakeOptionsResponse("HEAD,GET,POST,OPTIONS,TRACE"));
+                    break;
+                case "GET":
+
+                    break;
+                case "POST":
+
+                    break;
+                default:
+                    SendResponseAsync(Response.MakeErrorResponse("Unsupported HTTP method: " + request.Method));
+                    break;
+            }
+            /*
             else if (request.Method == "GET")
             {
                 string key = request.Url;
@@ -58,31 +80,7 @@ namespace Sponge.Converter
 
                 // Response with the cache value
                 SendResponseAsync(Response.MakeOkResponse());
-            }
-            else if (request.Method == "DELETE")
-            {
-                string key = request.Url;
-
-                // Decode the key value
-                key = Uri.UnescapeDataString(key);
-                key = key.Replace("/api/cache", "", StringComparison.InvariantCultureIgnoreCase);
-                key = key.Replace("?key=", "", StringComparison.InvariantCultureIgnoreCase);
-
-                // Delete the cache value
-                if (CommonCache.GetInstance().DeleteCacheValue(key, out var value))
-                {
-                    // Response with the cache value
-                    SendResponseAsync(Response.MakeGetResponse(value));
-                }
-                else
-                    SendResponseAsync(Response.MakeErrorResponse(404, "Deleted cache value was not found for the key: " + key));
-            }
-            else if (request.Method == "OPTIONS")
-                SendResponseAsync(Response.MakeOptionsResponse());
-            else if (request.Method == "TRACE")
-                SendResponseAsync(Response.MakeTraceResponse(request.Cache.Data));
-            else
-                SendResponseAsync(Response.MakeErrorResponse("Unsupported HTTP method: " + request.Method));
+            }*/
         }
 
         protected override void OnReceivedRequestError(HttpRequest request, string error)
