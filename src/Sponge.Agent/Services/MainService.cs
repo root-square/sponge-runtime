@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sponge.Agent.Services
 {
-    internal class APIService : IService
+    internal class MainService : IService
     {
         public void Start() => AsyncHelper.RunSync(() => StartAsync());
 

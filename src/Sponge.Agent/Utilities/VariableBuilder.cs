@@ -49,5 +49,14 @@ namespace Sponge.Agent.Utilities
         {
             return AppDomain.CurrentDomain.BaseDirectory;
         }
+
+        /// <summary>
+        /// Returns the settings path.
+        /// </summary>
+        /// <returns>The settings path</returns>
+        internal static string GetSettingsPath()
+        {
+            return Path.Combine(GetBaseDirectory(), "sponge.json");
+        }
     }
 }

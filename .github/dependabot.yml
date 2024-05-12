@@ -9,20 +9,13 @@ updates:
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
     target-branch: "main"
-    directory: "sources/Sponge/"
+    directory: "src/Sponge/"
     schedule:
       interval: "daily"
 
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
     target-branch: "main"
-    directory: "sources/Sponge.Bootstrapper/"
-    schedule:
-      interval: "daily"
-      
-  # Maintain dependencies for nuget
-  - package-ecosystem: "nuget"
-    target-branch: "main"
-    directory: "sources/Sponge.Processor/"
+    directory: "src/Sponge.Agent/"
     schedule:
       interval: "daily"
