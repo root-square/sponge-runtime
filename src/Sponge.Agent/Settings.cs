@@ -25,14 +25,22 @@ namespace Sponge.Agent
 
         public static Settings Instance
         {
-            get => _instance ?? (_instance = new Settings());
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new Settings();
+                }
+
+                return _instance;
+            }
         }
 
         public static void Write()
         {
             try
             {
-                var json = JsonSerializer.Serialize(_instance!, SourceGenerationContext.Default.Settings);
+                var json = JsonSerializer.Serialize(Instance, SourceGenerationContext.Default.Settings);
                 FileManager.WriteTextFile(VariableBuilder.GetSettingsPath(), json, Encoding.UTF8);
             }
             catch (Exception ex)
@@ -56,44 +64,83 @@ namespace Sponge.Agent
 
         #endregion
 
-        // APP
+        #region ::APP::
+
         [JsonPropertyName("app-mode")]
-        public int Mode { get; set; }
+        public int AppMode { get; set; } = 0;
+
+        [JsonPropertyName("app-use-dynamic-port")]
+        public bool AppUseDynamicPort { get; set; } = false;
 
         [JsonPropertyName("app-port")]
-        public ushort Port { get; set; }
+        public ushort AppPort { get; set; } = 40126;
 
-        // BOOT
+        #endregion
+
+        #region ::BOOT::
+
         [JsonPropertyName("boot-enable")]
-        public bool EnableBoot { get; set; }
+        public bool EnableBoot { get; set; } = true;
 
         [JsonPropertyName("boot-target")]
-        public string? Target { get; set; }
+        public string? BootTarget { get; set; } = "base.bin";
 
         [JsonPropertyName("boot-priority")]
-        public int Priority { get; set; }
+        public int BootPriority { get; set; } = 1;
 
         [JsonPropertyName("boot-sync-io")]
-        public bool SyncIO { get; set; }
+        public bool BootSyncIO { get; set; } = true;
 
         [JsonPropertyName("boot-sync-lifecycle")]
-        public bool SyncLifecycle { get; set; }
+        public bool BootSyncLifecycle { get; set; } = true;
 
-        //TASK
+        #endregion
+
+        #region ::CACHE::
+
+        [JsonPropertyName("cache-enable")]
+        public bool EnableCache { get; set; } = true;
+
+        [JsonPropertyName("cache-strategy")]
+        public string? CacheStrategy { get; set; } = "lfu";
+
+        [JsonPropertyName("cache-capacity")]
+        public int CacheCapacity { get; set; } = 1000;
+
+        [JsonPropertyName("cache-duration")]
+        public int CacheDuration { get; set; } = 10;
+
+        [JsonPropertyName("preload-enable")]
+        public bool EnablePreload { get; set; } = false;
+
+        [JsonPropertyName("preload-to")]
+        public string? PreloadTo { get; set; } = "png";
+
+        #endregion
+
+        #region ::TASK::
+
         [JsonPropertyName("task-use-strict-rule")]
-        public bool UseStrictRule { get; set; }
+        public bool TaskUseStrictRule { get; set; } = true;
 
         [JsonPropertyName("task-use-validator")]
-        public bool UseValidator { get; set; }
+        public bool TaskUseValidator { get; set; } = true;
 
-        public bool UseMultiThreading { get; set; }
+        [JsonPropertyName("task-use-multi-threading")]
+        public bool TaskUseMultiThreading { get; set; } = true;
 
-        public int MaxConcurrency { get; set; }
+        [JsonPropertyName("task-max-concurrency")]
+        public int TaskMaxConcurrency { get; set; } = 4;
 
-        public bool UseTimeout { get; set; }
+        [JsonPropertyName("task-use-timeout")]
+        public bool TaskUseTimeout { get; set; } = true;
 
-        public int Timeout { get; set; }
+        [JsonPropertyName("task-timeout")]
+        public int TaskTimeout { get; set; } = 360;
 
-        public Dictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
+        [JsonPropertyName("task-params")]
+        public Dictionary<string, string> TaskParameters { get; set; } = new Dictionary<string, string>();
+
+        #endregion
     }
 }

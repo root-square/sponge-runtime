@@ -56,7 +56,7 @@ namespace Sponge.Agent
 
         private static void InitializeSystem()
         {
-            int port = 40126;
+            /*int port = 40126;
 
             Log.Information($"HTTP server port: {port}");
             Log.Information($"HTTP server website: http://localhost:{port}/api/index.html");
@@ -92,7 +92,7 @@ namespace Sponge.Agent
             // Stop the server
             Log.Information("Server stopping...");
             server.Stop();
-            Log.Information("Done!");
+            Log.Information("Done!");*/
         }
 
         private static void InitializeServices()
