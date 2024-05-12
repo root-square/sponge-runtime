@@ -6,7 +6,7 @@ on:
       product-name:
         description: 'Product name'
         required: true
-        default: 'Toybox'
+        default: 'Sponge'
         type: string
       product-version:
         description: 'Product version'
@@ -16,7 +16,7 @@ on:
       file-desc:
         description: 'File description'
         required: true
-        default: 'Toybox Image Converter'
+        default: 'Sponge'
         type: string
       file-version:
         description: 'File version'
@@ -26,12 +26,12 @@ on:
       company:
         description: 'Company'
         required: true
-        default: 'Toybox Contributors'
+        default: 'Sponge Contributors'
         type: string
       copyright:
         description: 'Copyright'
         required: true
-        default: 'Copyright (c) 2022 Toybox Contributors all rights reserved.'
+        default: 'Copyright (c) 2024 Sponge Contributors all rights reserved.'
         type: string
       remove-debug-symbols:
         description: 'Remove debug symbols'
@@ -47,10 +47,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
-      - name: Setup .NET 7 SDK
-        uses: actions/setup-dotnet@v3
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '7.0.x'
+          dotnet-version: '8.0.x'
         
       - name: Build for x64
         run: |
