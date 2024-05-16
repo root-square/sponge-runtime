@@ -7,7 +7,7 @@
 </p>
 
 ## Docs
-[See the documentation](./guide/GUIDE.md) for instructions on how to use it.
+[See the documentation](./docs/GUIDE.md) for instructions on how to use it.
 
 ## Build
 ### Requirements
