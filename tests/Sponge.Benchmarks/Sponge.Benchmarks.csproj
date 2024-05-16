@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -10,7 +10,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\BARS_8bit_CMYKWRGB.png" />
+    <None Remove="Assets\RAINBOW_8bit_RGB.png" />
+    <None Remove="Assets\TESTCARD_8bit_RGB.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Sponge.Agent\Sponge.Agent.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\BARS_8bit_CMYKWRGB.png" />
+    <Resource Include="Assets\RAINBOW_8bit_RGB.png" />
+    <Resource Include="Assets\TESTCARD_8bit_RGB.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>

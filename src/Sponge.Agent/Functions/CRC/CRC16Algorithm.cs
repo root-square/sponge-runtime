@@ -11,7 +11,7 @@ namespace Sponge.Agent.Functions.CRC
     /// Implementation of CRC-16(ANSI/MODBUS).
     /// This class supports several convenient static methods returning the CRC as UInt16.
     /// </summary>
-    internal class CRC16Algorithm
+    public class CRC16Algorithm
     {
         private readonly static ushort[] TABLE = {
             0X0000, 0XC0C1, 0XC181, 0X0140, 0XC301, 0X03C0, 0X0280, 0XC241, 0XC601, 0X06C0,

@@ -10,7 +10,7 @@ namespace Sponge.Agent.Functions.VIPS
     /// <summary>
     /// Provides image functions based on libvips.
     /// </summary>
-    internal static class VIPS
+    public static class VIPS
     {
         /// <summary>
         /// Convert the image to AVIF format. <br/>
@@ -23,7 +23,7 @@ namespace Sponge.Agent.Functions.VIPS
         /// <param name="useLossless">Enable lossless compression</param>
         /// <param name="useSubsampling">Enable chroma sub-sampling</param>
         /// <param name="keepMetadata">Keep the image metadata</param>
-        internal static void ConvertToAvif(Stream stream, int? q = null, int? effort = null, bool? useLossless = null, bool? useSubsampling = null, bool? keepMetadata = null)
+        public static void ConvertToAvif(Stream stream, int? q = null, int? effort = null, bool? useLossless = null, bool? useSubsampling = null, bool? keepMetadata = null)
         {
             using (var image = Image.NewFromStream(stream))
             {
@@ -39,7 +39,7 @@ namespace Sponge.Agent.Functions.VIPS
         /// <param name="effort">Numerized CPU effort(1~10)</param>
         /// <param name="useInterlace">Enable interlace mode</param>
         /// <param name="keepMetadata">Keep the image metadata</param>
-        internal static void ConvertToGif(Stream stream, int? effort = null, bool? useInterlace = null, bool? keepMetadata = null)
+        public static void ConvertToGif(Stream stream, int? effort = null, bool? useInterlace = null, bool? keepMetadata = null)
         {
             using (var image = Image.NewFromStream(stream))
             {
@@ -56,7 +56,7 @@ namespace Sponge.Agent.Functions.VIPS
         /// <param name="useInterlace">Enable interlace mode</param>
         /// <param name="useSubsampling">Enable chroma sub-sampling</param>
         /// <param name="keepMetadata">Keep the image metadata</param>
-        internal static void ConvertToJpeg(Stream stream, int? q = null, bool? useInterlace = null, bool? useSubsampling = null, bool? keepMetadata = null)
+        public static void ConvertToJpeg(Stream stream, int? q = null, bool? useInterlace = null, bool? useSubsampling = null, bool? keepMetadata = null)
         {
             using (var image = Image.NewFromStream(stream))
             {
@@ -74,7 +74,7 @@ namespace Sponge.Agent.Functions.VIPS
         /// <param name="compression">Numerized compression level(1~10)</param>
         /// <param name="useInterlace">Enable interlace mode</param>
         /// <param name="keepMetadata">Keep the image metadata</param>
-        internal static void ConvertToPng(Stream stream, int? q = null, int? effort = null, int? compression = null, bool? useInterlace = null, bool? keepMetadata = null)
+        public static void ConvertToPng(Stream stream, int? q = null, int? effort = null, int? compression = null, bool? useInterlace = null, bool? keepMetadata = null)
         {
             using (var image = Image.NewFromStream(stream))
             {
@@ -93,7 +93,7 @@ namespace Sponge.Agent.Functions.VIPS
         /// <param name="effort">Numerized CPU effort(1~10)</param>
         /// <param name="useLossless">Enable lossless compression</param>
         /// <param name="keepMetadata">Keep the image metadata</param>
-        internal static void ConvertToWebp(Stream stream, int? q = null, int? effort = null, bool? useLossless = null, bool? keepMetadata = null)
+        public static void ConvertToWebp(Stream stream, int? q = null, int? effort = null, bool? useLossless = null, bool? keepMetadata = null)
         {
             using (var image = Image.NewFromStream(stream))
             {
