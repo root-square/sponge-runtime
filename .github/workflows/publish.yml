@@ -41,11 +41,11 @@ jobs:
         run: |
           # Build for x64
           ./tools/publish.ps1 -target Sponge/Sponge.csproj --runtime win-x64 -productName "Sponge" -fileDesc "A dynamic game resource compressor and decompressor" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.ui-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
-          ./tools/publish.ps1 -target Sponge.Agent/Sponge.Agent.csproj --runtime win-x64 -productName "Sponge Agent" -fileDesc "An agent for Sponge, which provides core functions." -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.agent-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
+          ./tools/publish.ps1 -target Sponge.Agent/Sponge.Agent.csproj --runtime win-x64 -productName "Sponge Agent" -fileDesc "An agent which provides core functions for Sponge." -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.agent-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
           
           # Build for ARM64
           ./tools/publish.ps1 -target Sponge/Sponge.csproj --runtime win-arm64 -productName "Sponge" -fileDesc "A dynamic game resource compressor and decompressor" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.ui-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
-          ./tools/publish.ps1 -target Sponge.Agent/Sponge.Agent.csproj --runtime win-arm64 -productName "Sponge Agent" -fileDesc "An agent for Sponge, which provides core functions." -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.agent-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
+          ./tools/publish.ps1 -target Sponge.Agent/Sponge.Agent.csproj --runtime win-arm64 -productName "Sponge Agent" -fileDesc "An agent which provides core functions for Sponge." -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.agent-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
         shell: pwsh
         
       - name: Copy Artifacts
