@@ -67,16 +67,8 @@ jobs:
         
       - name: Copy Docs
         run: |
-          New-Item -Path "./artifacts/publish/Sponge/release_win-x64/" -Name "docs" -ItemType "directory"
-          New-Item -Path "./artifacts/publish/Sponge/release_win-arm64/" -Name "docs" -ItemType "directory"
-          New-Item -Path "./artifacts/publish/Sponge.Agent/release_win-x64/" -Name "docs" -ItemType "directory"
-          New-Item -Path "./artifacts/publish/Sponge.Agent/release_win-arm64/" -Name "docs" -ItemType "directory"
           New-Item -Path "./artifacts/packages/x64" -Name "docs" -ItemType "directory"
           New-Item -Path "./artifacts/packages/arm64" -Name "docs" -ItemType "directory"
-          Copy-Item -Path "./docs/*" -Destination "./artifacts/publish/Sponge/release_win-x64/" -Recurse
-          Copy-Item -Path "./docs/*" -Destination "./artifacts/publish/Sponge/release_win-arm64/" -Recurse
-          Copy-Item -Path "./docs/*" -Destination "./artifacts/publish/Sponge.Agent/release_win-x64/" -Recurse
-          Copy-Item -Path "./docs/*" -Destination "./artifacts/publish/Sponge.Agent/release_win-arm64/" -Recurse
           Copy-Item -Path "./docs/*" -Destination "./artifacts/packages/x64/docs" -Recurse
           Copy-Item -Path "./docs/*" -Destination "./artifacts/packages/arm64/docs" -Recurse
         shell: pwsh
@@ -107,10 +99,6 @@ jobs:
         run: |
           Compress-Archive -Path ./artifacts/packages/x64/* -DestinationPath ./artifacts/sponge-x64.zip -Force
           Compress-Archive -Path ./artifacts/packages/arm64/* -DestinationPath ./artifacts/sponge-arm64.zip -Force
-          Compress-Archive -Path ./artifacts/publish/Sponge/release_win-x64/* -DestinationPath ./artifacts/sponge-ui-x64.zip -Force
-          Compress-Archive -Path ./artifacts/publish/Sponge/release_win-arm64/* -DestinationPath ./artifacts/sponge-ui-arm64.zip -Force
-          Compress-Archive -Path ./artifacts/publish/Sponge.Agent/release_win-x64/* -DestinationPath ./artifacts/sponge-agent-x64.zip -Force
-          Compress-Archive -Path ./artifacts/publish/Sponge.Agent/release_win-arm64/* -DestinationPath ./artifacts/sponge-agent-arm64.zip -Force
         shell: pwsh 
         
       - name: Upload Artifacts
@@ -120,10 +108,6 @@ jobs:
           path: |
             ./artifacts/sponge-x64.zip
             ./artifacts/sponge-arm64.zip
-            ./artifacts/sponge-ui-x64.zip
-            ./artifacts/sponge-ui-arm64.zip
-            ./artifacts/sponge-agent-x64.zip
-            ./artifacts/sponge-agent-arm64.zip
   
   release:
     needs: build
@@ -148,62 +132,22 @@ jobs:
           draft: false
           prerelease: false
           
-      - name: Upload Artifacts(Package/x64)
+      - name: Upload Artifacts(x64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
           asset_path: ./sponge-x64.zip
-          asset_name: sponge-x64-v${{ inputs.product-version }}.zip
+          asset_name: sponge-v${{ inputs.product-version }}-x64.zip
           asset_content_type: application/zip
           
-      - name: Upload Artifacts(Package/ARM64)
+      - name: Upload Artifacts(ARM64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
           asset_path: ./sponge-arm64.zip
-          asset_name: sponge-arm64-v${{ inputs.product-version }}.zip
-          asset_content_type: application/zip
-          
-      - name: Upload Artifacts(UI/x64)
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./sponge-ui-x64.zip
-          asset_name: sponge-x64-v${{ inputs.ui-version }}-ui.zip
-          asset_content_type: application/zip
-          
-      - name: Upload Artifacts(UI/ARM64)
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./sponge-ui-arm64.zip
-          asset_name: sponge-arm64-v${{ inputs.ui-version }}-ui.zip
-          asset_content_type: application/zip
-          
-      - name: Upload Artifacts(Agent/x64)
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./sponge-agent-x64.zip
-          asset_name: sponge-x64-v${{ inputs.agent-version }}-agent.zip
-          asset_content_type: application/zip
-          
-      - name: Upload Artifacts(Agent/ARM64)
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./sponge-agent-arm64.zip
-          asset_name: sponge-arm64-v${{ inputs.agent-version }}-agent.zip
+          asset_name: sponge-v${{ inputs.product-version }}-arm64.zip
           asset_content_type: application/zip
