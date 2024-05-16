@@ -8,13 +8,8 @@ on:
         required: true
         default: '1.0.0'
         type: string
-      ui-version:
-        description: 'UI Version'
-        required: true
-        default: '1.0.0'
-        type: string
-      agent-version:
-        description: 'Agent Version'
+      file-version:
+        description: 'File Version'
         required: true
         default: '1.0.0'
         type: string
@@ -40,12 +35,10 @@ jobs:
       - name: Build
         run: |
           # Build for x64
-          ./tools/publish.ps1 -target Sponge/Sponge.csproj --runtime win-x64 -productName "Sponge" -fileDesc "Sponge UI" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.ui-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
-          ./tools/publish.ps1 -target Sponge.Agent/Sponge.Agent.csproj --runtime win-x64 -productName "Sponge Agent" -fileDesc "Sponge Agent" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.agent-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
+          ./tools/publish.ps1 -target Sponge/Sponge.csproj --runtime win-x64 -productName "Sponge" -fileDesc "Sponge" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.file-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
           
           # Build for ARM64
-          ./tools/publish.ps1 -target Sponge/Sponge.csproj --runtime win-arm64 -productName "Sponge" -fileDesc "Sponge UI" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.ui-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
-          ./tools/publish.ps1 -target Sponge.Agent/Sponge.Agent.csproj --runtime win-arm64 -productName "Sponge Agent" -fileDesc "Sponge Agent" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.agent-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
+          ./tools/publish.ps1 -target Sponge/Sponge.csproj --runtime win-arm64 -productName "Sponge" -fileDesc "Sponge" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.file-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
         shell: pwsh
         
       - name: Copy Artifacts
@@ -53,16 +46,12 @@ jobs:
           New-Item -Path "./artifacts" -Name "packages" -ItemType "directory"
           New-Item -Path "./artifacts/packages" -Name "x64" -ItemType "directory"
           New-Item -Path "./artifacts/packages" -Name "arm64" -ItemType "directory"
-          New-Item -Path "./artifacts/packages/x64" -Name "externals" -ItemType "directory"
-          New-Item -Path "./artifacts/packages/arm64" -Name "externals" -ItemType "directory"
           
           # Copy x64 build artifacts.
           Copy-Item -Path "./artifacts/publish/Sponge/release_win-x64/*" -Destination "./artifacts/packages/x64" -Recurse
-          Copy-Item -Path "./artifacts/publish/Sponge.Agent/release_win-x64/*" -Destination "./artifacts/packages/x64/externals" -Recurse
           
           # Copy ARM64 build artifacts.
           Copy-Item -Path "./artifacts/publish/Sponge/release_win-arm64/*" -Destination "./artifacts/packages/arm64" -Recurse
-          Copy-Item -Path "./artifacts/publish/Sponge.Agent/release_win-arm64/*" -Destination "./artifacts/packages/arm64/externals" -Recurse
         shell: pwsh
         
       - name: Copy Docs
@@ -91,8 +80,8 @@ jobs:
         run: |
           Expand-Archive -Path "./vips-dev-w64-web-*-static.zip" -DestinationPath "./artifacts/temp/vips_x64"
           Expand-Archive -Path "./vips-dev-arm64-web-*-static.zip" -DestinationPath "./artifacts/temp/vips_arm64"
-          Copy-Item -Path "./artifacts/temp/vips_x64/vips-dev-*/bin/*" -Destination "./artifacts/packages/x64/externals" -Recurse
-          Copy-Item -Path "./artifacts/temp/vips_arm64/vips-dev-*/bin/*" -Destination "./artifacts/packages/arm64/externals" -Recurse
+          Copy-Item -Path "./artifacts/temp/vips_x64/vips-dev-*/bin/*" -Destination "./artifacts/packages/x64" -Recurse
+          Copy-Item -Path "./artifacts/temp/vips_arm64/vips-dev-*/bin/*" -Destination "./artifacts/packages/arm64" -Recurse
         shell: pwsh
         
       - name: Compress Artifacts
