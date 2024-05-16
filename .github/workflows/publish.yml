@@ -3,38 +3,23 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      product-name:
-        description: 'Product name'
-        required: true
-        default: 'Sponge'
-        type: string
       product-version:
-        description: 'Product version'
+        description: 'Product Version'
         required: true
         default: '1.0.0'
         type: string
-      file-desc:
-        description: 'File description'
-        required: true
-        default: 'Sponge'
-        type: string
-      file-version:
-        description: 'File version'
+      ui-version:
+        description: 'UI Version'
         required: true
         default: '1.0.0'
         type: string
-      company:
-        description: 'Company'
+      agent-version:
+        description: 'Agent Version'
         required: true
-        default: 'Sponge Contributors'
-        type: string
-      copyright:
-        description: 'Copyright'
-        required: true
-        default: 'Copyright (c) 2024 Sponge Contributors all rights reserved.'
+        default: '1.0.0'
         type: string
       remove-debug-symbols:
-        description: 'Remove debug symbols'
+        description: 'Remove Debug Symbols'
         required: false
         default: true
         type: boolean
@@ -52,123 +37,171 @@ jobs:
         with:
           dotnet-version: '8.0.x'
         
-      - name: Build for x64
+      - name: Build
         run: |
-          ./scripts/publish.ps1 -target ToyboxImageConverter/ToyboxImageConverter.csproj -publishprofile x64.pubxml -productName "${{ inputs.product-name }}" -productVersion "${{ inputs.product-version }}" -fileDesc "${{ inputs.file-desc }}" -fileVersion "${{ inputs.file-version }}" -company "${{ inputs.company }}" -copyright "${{ inputs.copyright }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
+          # Build for x64
+          ./tools/publish.ps1 -target Sponge/Sponge.csproj --runtime win-x64 -productName "Sponge" -fileDesc "A dynamic game resource compressor and decompressor" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.ui-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
+          ./tools/publish.ps1 -target Sponge.Agent/Sponge.Agent.csproj --runtime win-x64 -productName "Sponge Agent" -fileDesc "An agent for Sponge, which provides core functions." -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.agent-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
+          
+          # Build for ARM64
+          ./tools/publish.ps1 -target Sponge/Sponge.csproj --runtime win-arm64 -productName "Sponge" -fileDesc "A dynamic game resource compressor and decompressor" -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.ui-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
+          ./tools/publish.ps1 -target Sponge.Agent/Sponge.Agent.csproj --runtime win-arm64 -productName "Sponge Agent" -fileDesc "An agent for Sponge, which provides core functions." -company "Sponge Contributors" -copyright "Copyright (c) 2024 Sponge Contributors all rights reserved." -productVersion "${{ inputs.product-version }}" -fileVersion "${{ inputs.agent-version }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
         shell: pwsh
         
-      - name: Build for ARM64
-        run: |
-          ./scripts/publish.ps1 -target ToyboxImageConverter/ToyboxImageConverter.csproj -publishprofile arm64.pubxml -productName "${{ inputs.product-name }}" -productVersion "${{ inputs.product-version }}" -fileDesc "${{ inputs.file-desc }}" -fileVersion "${{ inputs.file-version }}" -company "${{ inputs.company }}" -copyright "${{ inputs.copyright }}" -excludeSymbols $${{ inputs.remove-debug-symbols }}
+      - name: Copy Artifacts
+        run: |      
+          New-Item -Path "./artifacts" -Name "packages" -ItemType "directory"
+          New-Item -Path "./artifacts/packages" -Name "x64" -ItemType "directory"
+          New-Item -Path "./artifacts/packages" -Name "arm64" -ItemType "directory"
+          New-Item -Path "./artifacts/packages/x64" -Name "externals" -ItemType "directory"
+          New-Item -Path "./artifacts/packages/arm64" -Name "externals" -ItemType "directory"
+          
+          # Copy x64 build artifacts.
+          Copy-Item -Path "./artifacts/publish/Sponge/release_win-x64/*" -Destination "./artifacts/packages/x64"
+          Copy-Item -Path "./artifacts/publish/Sponge.Agent/release_win-x64/*" -Destination "./artifacts/packages/x64/externals"
+          
+          # Copy ARM64 build artifacts.
+          Copy-Item -Path "./artifacts/publish/Sponge/release_win-arm64/*" -Destination "./artifacts/packages/arm64"
+          Copy-Item -Path "./artifacts/publish/Sponge.Agent/release_win-arm64/*" -Destination "./artifacts/packages/arm64/externals"
         shell: pwsh
         
-      - name: Copy licenses
+      - name: Copy Docs
         run: |
-          New-Item -Path "./src/ToyboxImageConverter/bin/publish/x64" -Name "docs" -ItemType "directory"
-          New-Item -Path "./src/ToyboxImageConverter/bin/publish/arm64" -Name "docs" -ItemType "directory"
-          Copy-Item -Path "./docs/*" -Destination "./src/ToyboxImageConverter/bin/publish/x64/docs"
-          Copy-Item -Path "./docs/*" -Destination "./src/ToyboxImageConverter/bin/publish/arm64/docs"
+          New-Item -Path "./artifacts/publish/Sponge/release_win-x64/" -Name "docs" -ItemType "directory"
+          New-Item -Path "./artifacts/publish/Sponge/release_win-arm64/" -Name "docs" -ItemType "directory"
+          New-Item -Path "./artifacts/publish/Sponge.Agent/release_win-x64/" -Name "docs" -ItemType "directory"
+          New-Item -Path "./artifacts/publish/Sponge.Agent/release_win-arm64/" -Name "docs" -ItemType "directory"
+          New-Item -Path "./artifacts/packages/x64" -Name "docs" -ItemType "directory"
+          New-Item -Path "./artifacts/packages/arm64" -Name "docs" -ItemType "directory"
+          Copy-Item -Path "./docs/*" -Destination "./artifacts/publish/Sponge/release_win-x64/"
+          Copy-Item -Path "./docs/*" -Destination "./artifacts/publish/Sponge/release_win-arm64/"
+          Copy-Item -Path "./docs/*" -Destination "./artifacts/publish/Sponge.Agent/release_win-x64/"
+          Copy-Item -Path "./docs/*" -Destination "./artifacts/publish/Sponge.Agent/release_win-arm64/"
+          Copy-Item -Path "./docs/*" -Destination "./artifacts/packages/x64/docs"
+          Copy-Item -Path "./docs/*" -Destination "./artifacts/packages/arm64/docs"
         shell: pwsh
         
-      - name: Compress build outputs
-        run: |
-          Compress-Archive -Path ./src/ToyboxImageConverter/bin/publish/x64/* -DestinationPath ./x64.zip -Force
-          Compress-Archive -Path ./src/ToyboxImageConverter/bin/publish/arm64/* -DestinationPath ./arm64.zip -Force
-        shell: pwsh
-        
-      - name: Download VIPS
+      - name: Download VIPS(x64)
         uses: robinraju/release-downloader@v1.7
         with:
-          repository: "project-toybox/toybox-vips"
+          repository: "libvips/build-win64-mxe"
           latest: true
-          fileName: "*.zip"
+          fileName: "vips-dev-w64-web-*-static.zip"
           
-      - name: Decompress and copy VIPS
+      - name: Download VIPS(ARM64)
+        uses: robinraju/release-downloader@v1.7
+        with:
+          repository: "libvips/build-win64-mxe"
+          latest: true
+          fileName: "vips-dev-arm64-web-*-static.zip"
+          
+      - name: Decompress VIPS
         run: |
-          New-Item -Path "./" -Name "vips-x64" -ItemType "directory"
-          New-Item -Path "./" -Name "vips-arm64" -ItemType "directory"
-          Expand-Archive -Path "./vips-dev-w64-all-*-hevc.zip" -DestinationPath "./vips-x64"
-          Expand-Archive -Path "./vips-dev-arm64-all-*-hevc.zip" -DestinationPath "./vips-arm64"
-          Copy-Item -Path "./vips-x64/vips-dev-*/bin/*" -Destination "./src/ToyboxImageConverter/bin/publish/x64/" -Recurse
-          Copy-Item -Path "./vips-arm64/vips-dev-*/bin/*" -Destination "./src/ToyboxImageConverter/bin/publish/arm64/" -Recurse
+          Expand-Archive -Path "./vips-dev-w64-web-*-static.zip" -DestinationPath "./artifacts/packages/x64/externals"
+          Expand-Archive -Path "./vips-dev-arm64-web-*-static.zip" -DestinationPath "./artifacts/packages/arm64/externals"
         shell: pwsh
         
-      - name: Compress build outputs with VIPS
+      - name: Compress Artifacts
         run: |
-          Compress-Archive -Path ./src/ToyboxImageConverter/bin/publish/x64/* -DestinationPath ./x64-with-vips.zip -Force
-          Compress-Archive -Path ./src/ToyboxImageConverter/bin/publish/arm64/* -DestinationPath ./arm64-with-vips.zip -Force
-        shell: pwsh   
+          Compress-Archive -Path ./artifacts/packages/x64/* -DestinationPath ./artifacts/sponge-x64.zip -Force
+          Compress-Archive -Path ./artifacts/packages/arm64/* -DestinationPath ./artifacts/sponge-arm64.zip -Force
+          Compress-Archive -Path ./artifacts/publish/Sponge/release_win-x64/* -DestinationPath ./artifacts/sponge-ui-x64.zip -Force
+          Compress-Archive -Path ./artifacts/publish/Sponge/release_win-arm64/* -DestinationPath ./artifacts/sponge-ui-arm64.zip -Force
+          Compress-Archive -Path ./artifacts/publish/Sponge.Agent/release_win-x64/* -DestinationPath ./artifacts/sponge-agent-x64.zip -Force
+          Compress-Archive -Path ./artifacts/publish/Sponge.Agent/release_win-arm64/* -DestinationPath ./artifacts/sponge-agent-arm64.zip -Force
+        shell: pwsh 
         
-      - name: Upload build outputs
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: build-outputs
+          name: artifacts
           path: |
-            ./x64.zip
-            ./arm64.zip
-            ./x64-with-vips.zip
-            ./arm64-with-vips.zip
-            
+            ./artifacts/sponge-x64.zip
+            ./artifacts/sponge-arm64.zip
+            ./artifacts/sponge-ui-x64.zip
+            ./artifacts/sponge-ui-arm64.zip
+            ./artifacts/sponge-agent-x64.zip
+            ./artifacts/sponge-agent-arm64.zip
   
   release:
     needs: build
-    name: Release to GitHub
+    name: Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Download build outputs
+      - name: Download Artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build-outputs
+          name: artifacts
           
       - id: create-release
-        name: Create a release
+        name: Create a Release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ inputs.file-version }}
-          release_name: v${{ inputs.file-version }}
+          tag_name: v${{ inputs.product-version }}
+          release_name: v${{ inputs.product-version }}
           draft: false
           prerelease: false
           
-      - name: Upload the x64 build output
+      - name: Upload Artifacts(Package/x64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./x64.zip
-          asset_name: toybox-image-converter-w64-${{ inputs.file-version }}.zip
+          asset_path: ./sponge-x64.zip
+          asset_name: sponge-v${{ inputs.product-version }}-x64.zip
           asset_content_type: application/zip
           
-      - name: Upload the ARM64 build output
+      - name: Upload Artifacts(Package/ARM64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./arm64.zip
-          asset_name: toybox-image-converter-arm64-${{ inputs.file-version }}.zip
+          asset_path: ./sponge-arm64.zip
+          asset_name: sponge-v${{ inputs.product-version }}-arm64.zip
           asset_content_type: application/zip
           
-      - name: Upload the x64(with VIPS) build output
+      - name: Upload Artifacts(UI/x64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./x64-with-vips.zip
-          asset_name: toybox-image-converter-with-vips-w64-${{ inputs.file-version }}.zip
+          asset_path: ./sponge-ui-x64.zip
+          asset_name: sponge-ui-v${{ inputs.ui-version }}-x64.zip
           asset_content_type: application/zip
           
-      - name: Upload the ARM64(with VIPS) build output
+      - name: Upload Artifacts(UI/ARM64)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./arm64-with-vips.zip
-          asset_name: toybox-image-converter-with-vips-arm64-${{ inputs.file-version }}.zip
+          asset_path: ./sponge-ui-arm64.zip
+          asset_name: sponge-ui-v${{ inputs.ui-version }}-ARM64.zip
+          asset_content_type: application/zip
+          
+      - name: Upload Artifacts(Agent/x64)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ./sponge-agent-x64.zip
+          asset_name: sponge-agent-v${{ inputs.agent-version }}-x64.zip
+          asset_content_type: application/zip
+          
+      - name: Upload Artifacts(Agent/ARM64)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ./sponge-agent-arm64.zip
+          asset_name: sponge-agent-v${{ inputs.agent-version }}-arm64.zip
           asset_content_type: application/zip
