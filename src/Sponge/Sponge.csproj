@@ -1,66 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <AssemblyName>sponge</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
+    <PublishAot>true</PublishAot>
+    <InvariantGlobalization>true</InvariantGlobalization>
     <ApplicationIcon>assets/icon.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64;arm64</Platforms>
-	<RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
-  </PropertyGroup>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
 
-  <ItemGroup>
-    <Compile Remove="Assets\Locales\**" />
-    <Compile Remove="Controls\**" />
-    <Compile Remove="Extensions\**" />
-    <Compile Remove="Utilities\**" />
-    <Compile Remove="Validators\**" />
-    <EmbeddedResource Remove="Assets\Locales\**" />
-    <EmbeddedResource Remove="Controls\**" />
-    <EmbeddedResource Remove="Extensions\**" />
-    <EmbeddedResource Remove="Utilities\**" />
-    <EmbeddedResource Remove="Validators\**" />
-    <None Remove="Assets\Locales\**" />
-    <None Remove="Controls\**" />
-    <None Remove="Extensions\**" />
-    <None Remove="Utilities\**" />
-    <None Remove="Validators\**" />
-    <Page Remove="Assets\Locales\**" />
-    <Page Remove="Controls\**" />
-    <Page Remove="Extensions\**" />
-    <Page Remove="Utilities\**" />
-    <Page Remove="Validators\**" />
-  </ItemGroup>
+    <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
+
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <UseSystemResourceKeys>true</UseSystemResourceKeys>
+	  
+    <IlcOptimizationPreference>Size</IlcOptimizationPreference>
+    <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+
+    <DebuggerSupport>false</DebuggerSupport>
+    <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+    <EventSourceSupport>false</EventSourceSupport>
+    <HttpActivityPropagationSupport>false</HttpActivityPropagationSupport>
+    <MetadataUpdaterSupport>false</MetadataUpdaterSupport>
+  </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Assets\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Common" Version="8.2.2" />
-    <PackageReference Include="CommunityToolkit.HighPerformance" Version="8.2.2" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="BitFaster.Caching" Version="2.5.0" />
+    <PackageReference Include="NetCoreServer" Version="8.0.7" />
+    <PackageReference Include="NetVips" Version="2.4.1" />
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="Squid-Box.SevenZipSharp.Lite" Version="1.6.2.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\icon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Assets\Styles\Brushes\Brushes.Light.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\Pages\" />
   </ItemGroup>
 
 </Project>

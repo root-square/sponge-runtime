@@ -1,4 +1,4 @@
-﻿using Sponge.Agent.Functions.VIPS;
+﻿using Sponge.Functions.VIPS;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sponge.Agent\Sponge.Agent.csproj" />
+    <ProjectReference Include="..\..\src\Sponge\Sponge.csproj" />
   </ItemGroup>
 
   <ItemGroup>
