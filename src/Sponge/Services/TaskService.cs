@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sponge.Services
 {
-    internal class MainService : IService
+    internal class TaskService : IService
     {
         public void Start() => AsyncHelper.RunSync(() => StartAsync());
 
@@ -44,7 +44,7 @@ namespace Sponge.Services
         }
 
         // // TODO: Only if the 'Dispose(bool disposing)' has a logic to release unmanaged resources, re-define the destructor.
-        // ~Service()
+        // ~TaskService()
         // {
         //     // DO NOT CHANGE THIS CODE. It input a disposing code to the 'Dispose(bool disposing)' method.
         //     Dispose(disposing: false);

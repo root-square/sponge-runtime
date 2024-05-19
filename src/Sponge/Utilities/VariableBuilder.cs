@@ -51,12 +51,12 @@ namespace Sponge.Utilities
         }
 
         /// <summary>
-        /// Returns the settings path.
+        /// Returns the configuration path.
         /// </summary>
-        /// <returns>The settings path</returns>
-        internal static string GetSettingsPath()
+        /// <returns>The configuration path</returns>
+        internal static string GetConfigurationPath()
         {
-            return Path.Combine(GetBaseDirectory(), "sponge.json");
+            return Path.Combine(GetBaseDirectory(), "sponge.config");
         }
     }
 }

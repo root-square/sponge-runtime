@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Sponge.Utilities
 {
     /// <summary>
-    /// Provides functions related to file I/O.
+    /// Provides functions related to text file I/O.
     /// </summary>
-    public class FileManager
+    public class TextFileHelper
     {
         /// <summary>
         /// Writes a text file in the specified path.

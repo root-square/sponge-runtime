@@ -9,6 +9,8 @@ namespace Sponge
     {
         static void Main(string[] args)
         {
+            ConfigurationHelper.Write();
+
             Signature();
             InitializeSerilog();
             InitializeNetVips();
@@ -17,7 +19,7 @@ namespace Sponge
 
         private static void Signature()
         {
-            Console.WriteLine($"Sponge Agent");
+            Console.WriteLine($"Sponge Runtime Environment");
             Console.WriteLine($"Copyright (c) 2024 Sponge Contributors all rights reserved.");
             Console.WriteLine();
         }
