@@ -1,9 +1,9 @@
 # Sponge Runtime
 
 <p align="left">
-    <a target="_blank" href="https://github.com/root-square/sponge/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/root-square/sponge/publish.yml?branch=main"></a>
-    <a target="_blank" href="https://github.com/root-square/sponge/releases/latest"><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/root-square/sponge"></a>
-    <a target="_blank" href="https://github.com/root-square/sponge/blob/main/docs/LICENSE.md"><img alt="GitHub" src="https://img.shields.io/github/license/root-square/sponge"></a>
+    <a target="_blank" href="https://github.com/root-square/sponge-runtime/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/root-square/sponge-runtime/publish.yml?branch=main"></a>
+    <a target="_blank" href="https://github.com/root-square/sponge-runtime/releases/latest"><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/root-square/sponge-runtime"></a>
+    <a target="_blank" href="https://github.com/root-square/sponge-runtime/blob/main/docs/LICENSE.md"><img alt="GitHub" src="https://img.shields.io/github/license/root-square/sponge-runtime"></a>
 </p>
 
 ## Docs
