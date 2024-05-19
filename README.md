@@ -1,4 +1,4 @@
-# Sponge
+# Sponge Runtime
 
 <p align="left">
     <a target="_blank" href="https://github.com/root-square/sponge/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/root-square/sponge/publish.yml?branch=main"></a>
