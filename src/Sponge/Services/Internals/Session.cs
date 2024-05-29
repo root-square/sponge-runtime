@@ -1,5 +1,6 @@
 ﻿using NetCoreServer;
 using Serilog;
+using Sponge.Services.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -11,76 +12,30 @@ using System.Web;
 
 namespace Sponge.Services.Internals
 {
-    class Session : HttpSession
+    public class Session : HttpSession
     {
-        public Session(HttpServer server) : base(server) { }
+        private Dictionary<string, RouteDelegate> _routes = new Dictionary<string, RouteDelegate>();
+
+        public Session(HttpServer server) : base(server)
+        {
+            _routes = ServiceProvider.Instance.Routes;
+        }
 
         protected override void OnReceivedRequest(HttpRequest request)
         {
             var path = request.Url.IndexOf("?") == -1 ? request.Url : request.Url.Substring(0, request.Url.IndexOf("?"));
             var queries = HttpUtility.ParseQueryString(request.Url);
 
-            switch (request.Method)
+            RouteDelegate? requestHandler = null;
+
+            if (_routes.TryGetValue(path.ToLower(), out requestHandler))
             {
-                case "HEAD":
-                    SendResponseAsync(Response.MakeHeadResponse());
-                    break;
-                case "TRACE":
-                    SendResponseAsync(Response.MakeTraceResponse(request.Cache.Data));
-                    break;
-                case "OPTIONS":
-                    SendResponseAsync(Response.MakeOptionsResponse("HEAD,GET,POST,OPTIONS,TRACE"));
-                    break;
-                case "GET":
-
-                    break;
-                case "POST":
-
-                    break;
-                default:
-                    SendResponseAsync(Response.MakeErrorResponse("Unsupported HTTP method: " + request.Method));
-                    break;
+                requestHandler(this, request);
             }
-            /*
-            else if (request.Method == "GET")
+            else
             {
-                string key = request.Url;
-
-                // Decode the key value
-                key = Uri.UnescapeDataString(key);
-                key = key.Replace("/api/cache", "", StringComparison.InvariantCultureIgnoreCase);
-                key = key.Replace("?key=", "", StringComparison.InvariantCultureIgnoreCase);
-
-                if (string.IsNullOrEmpty(key))
-                {
-                    // Response with all cache values
-                    SendResponseAsync(Response.MakeGetResponse(CommonCache.GetInstance().GetAllCache(), "application/json; charset=UTF-8"));
-                }
-                // Get the cache value by the given key
-                else if (CommonCache.GetInstance().GetCacheValue(key, out var value))
-                {
-                    // Response with the cache value
-                    SendResponseAsync(Response.MakeGetResponse(value));
-                }
-                else
-                    SendResponseAsync(Response.MakeErrorResponse(404, "Required cache value was not found for the key: " + key));
+                SendResponseAsync(Response.MakeErrorResponse(404, content: "404 - File Not Found"));
             }
-            else if ((request.Method == "POST") || (request.Method == "PUT"))
-            {
-                string key = request.Url;
-                string value = request.Body;
-
-                // Decode the key value
-                key = Uri.UnescapeDataString(key);
-                key = key.Replace("/api/cache", "", StringComparison.InvariantCultureIgnoreCase);
-                key = key.Replace("?key=", "", StringComparison.InvariantCultureIgnoreCase);
-
-                // Put the cache value
-                CommonCache.GetInstance().PutCacheValue(key, value);
-
-                // Response with the cache value
-                SendResponseAsync(Response.MakeOkResponse());
-            }*/
         }
 
         protected override void OnReceivedRequestError(HttpRequest request, string error)

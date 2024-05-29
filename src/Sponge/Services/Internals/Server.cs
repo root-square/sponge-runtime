@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Sponge.Services.Internals
 {
-    class Server : HttpServer
+    public class Server : HttpServer
     {
         public Server(IPAddress address, int port) : base(address, port) { }
 

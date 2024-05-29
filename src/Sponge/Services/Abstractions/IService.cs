@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NetCoreServer;
+using Sponge.Services.Internals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +10,20 @@ namespace Sponge.Services.Abstractions
 {
     public interface IService : IDisposable
     {
-        public static IService? Instance { get; private set; }
+        #region ::Variables::
+
+        public bool IsRoutable { get; }
+
+        public Dictionary<Route, RouteDelegate> Routes { get; init; }
+
+        #endregion
+
+        #region ::Functions::
 
         public void Start();
 
-        public Task StartAsync();
-
         public void Stop();
 
-        public Task StopAsync();
+        #endregion
     }
 }

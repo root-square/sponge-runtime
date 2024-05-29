@@ -13,6 +13,6 @@ namespace Sponge.Entities.Configurations
         public int Mode { get; set; } = 0;
 
         [JsonPropertyName("port")]
-        public ushort Port { get; set; } = 40126;
+        public int Port { get; set; } = 40126;
     }
 }
