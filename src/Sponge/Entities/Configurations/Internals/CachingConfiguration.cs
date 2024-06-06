@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Sponge.Entities.Configurations
+namespace Sponge.Entities.Configurations.Internals
 {
-    public class CacheConfiguration
+    public class CachingConfiguration
     {
         [JsonPropertyName("enable")]
         public bool Enable { get; set; } = true;

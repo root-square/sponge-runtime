@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Sponge.Entities.Configurations
+namespace Sponge.Entities.Configurations.Internals
 {
     public class LinkConfiguration
     {

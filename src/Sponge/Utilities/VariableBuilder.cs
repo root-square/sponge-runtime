@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,15 @@ namespace Sponge.Utilities
     /// </summary>
     internal static class VariableBuilder
     {
+        /// <summary>
+        /// Gets a value that indicates whether the runtime compiles dynamic code.
+        /// </summary>
+        /// <returns></returns>
+        internal static bool IsDynamicCompiled()
+        {
+            return RuntimeFeature.IsDynamicCodeCompiled;
+        }
+
         /// <summary>
         /// Returns the product version.
         /// </summary>

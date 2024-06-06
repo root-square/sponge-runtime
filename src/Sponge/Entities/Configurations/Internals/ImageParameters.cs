@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Sponge.Entities
+namespace Sponge.Entities.Configurations.Internals
 {
-    public class Parameters
+    public class ImageParameters
     {
         [JsonPropertyName("q")]
         public int? Q { get; set; }
@@ -29,8 +29,8 @@ namespace Sponge.Entities
 
         [JsonPropertyName("keep-metadata")]
         public bool? KeepMetadata { get; set; }
-        
-        public Parameters(int? q = null, int? effort = null, int? compression = null, bool? useLossless = null, bool? useInterlace = null, bool? useSubsampling = null, bool? keepMetadata = null)
+
+        public ImageParameters(int? q = null, int? effort = null, int? compression = null, bool? useLossless = null, bool? useInterlace = null, bool? useSubsampling = null, bool? keepMetadata = null)
         {
             Q = q;
             Effort = effort;

@@ -1,4 +1,4 @@
-﻿using Sponge.Entities;
+﻿using Sponge.Entities.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

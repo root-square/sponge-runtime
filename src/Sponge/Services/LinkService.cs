@@ -1,17 +1,14 @@
-﻿using NetCoreServer;
-using Sponge.Entities.Configurations;
+﻿using Sponge.Entities.Configurations;
 using Sponge.Services.Abstractions;
-using Sponge.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Sponge.Services
 {
-    public class AudioService : IService
+    public class LinkService : IService
     {
         #region ::Variables::
 
@@ -25,9 +22,9 @@ namespace Sponge.Services
 
         #region ::Constructors::
 
-        public AudioService()
+        public LinkService()
         {
-            
+
         }
 
         #endregion
@@ -36,7 +33,7 @@ namespace Sponge.Services
 
         public void Start()
         {
-            
+
         }
 
         public void Stop()
@@ -66,7 +63,7 @@ namespace Sponge.Services
         }
 
         // // TODO: Only if 'Dispose(bool disposing)' contains a logic to release unmanaged resources, re-define the destructor. 
-        // ~AudioService()
+        // ~LinkService()
         // {
         //     // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
         //     Dispose(disposing: false);

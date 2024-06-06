@@ -1,4 +1,4 @@
-﻿using Sponge.Entities;
+﻿using Sponge.Entities.Configurations;
 using Sponge.Services.Abstractions;
 using System;
 using System.Collections.Generic;

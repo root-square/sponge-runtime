@@ -10,7 +10,7 @@ namespace Sponge
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"Sponge Runtime Environment ({VariableBuilder.GetFileVersion()})");
+            Console.WriteLine($"Sponge Runtime Environment ({(VariableBuilder.IsDynamicCompiled() ? "core-clr" : "native-aot")}/{VariableBuilder.GetFileVersion()})");
             Console.WriteLine($"Copyright (c) 2024 Sponge Contributors all rights reserved.");
             Console.WriteLine();
 

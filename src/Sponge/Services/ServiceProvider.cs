@@ -42,6 +42,7 @@ namespace Sponge.Services
                 { "SVC_LOGGING", new LoggingService() },
                 { "SVC_CONFIG", new ConfigurationService() },
                 { "SVC_DIAGNOSTICS", new DiagnosticsService() },
+                { "SVC_LINK", new LinkService() },
                 { "SVC_CACHING", new CachingService() },
                 { "SVC_AUDIO", new AudioService() },
                 { "SVC_IMAGE", new ImageService() }
