@@ -1,9 +1,11 @@
-﻿using Sponge.Entities.Configurations;
+﻿using NetCoreServer;
+using Sponge.Entities.Configurations;
 using Sponge.Services.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Sponge.Services
@@ -24,7 +26,7 @@ namespace Sponge.Services
 
         public DiagnosticsService()
         {
-
+            Routes.Add(new Route("/api/status"), HandleStatusRequest);
         }
 
         #endregion
@@ -39,6 +41,33 @@ namespace Sponge.Services
         public void Stop()
         {
 
+        }
+
+        #endregion
+
+        #region ::Handlers::
+
+        private void HandleStatusRequest(HttpSession session, HttpRequest request)
+        {
+            switch (request.Method)
+            {
+                case "HEAD":
+                    session.SendResponseAsync(session.Response.MakeHeadResponse());
+                    break;
+                case "TRACE":
+                    session.SendResponseAsync(session.Response.MakeTraceResponse(request.Cache.Data));
+                    break;
+                case "OPTIONS":
+                    session.SendResponseAsync(session.Response.MakeOptionsResponse("HEAD,GET,OPTIONS,TRACE"));
+                    break;
+                case "GET":
+                    var json = JsonSerializer.Serialize(Instance, SourceGenerationContext.Default.Configuration);
+                    session.SendResponseAsync(session.Response.MakeGetResponse(json, "application/json; charset=UTF-8"));
+                    break;
+                default:
+                    session.SendResponseAsync(session.Response.MakeErrorResponse(501, "501 - Unsupported HTTP method: " + request.Method));
+                    break;
+            }
         }
 
         #endregion

@@ -24,7 +24,7 @@ namespace Sponge.Services
 
         public CachingService()
         {
-
+            //Routes.Add(new Route("/api/cache"), HandleStatusRequest);
         }
 
         #endregion

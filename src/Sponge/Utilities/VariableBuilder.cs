@@ -14,15 +14,6 @@ namespace Sponge.Utilities
     internal static class VariableBuilder
     {
         /// <summary>
-        /// Gets a value that indicates whether the runtime compiles dynamic code.
-        /// </summary>
-        /// <returns></returns>
-        internal static bool IsDynamicCompiled()
-        {
-            return RuntimeFeature.IsDynamicCodeCompiled;
-        }
-
-        /// <summary>
         /// Returns the product version.
         /// </summary>
         /// <returns>The product version</returns>

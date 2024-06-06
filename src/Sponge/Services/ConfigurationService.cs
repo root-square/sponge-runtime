@@ -93,11 +93,6 @@ namespace Sponge.Services
         {
             exception = null;
 
-            if (!(Instance.Runtime.Mode == 0 || Instance.Runtime.Mode == 1 || Instance.Runtime.Mode == 2))
-            {
-                exception = new ArgumentException("Unable to parse a configuration item.", "RUNTIME_MODE");
-            }
-
             if (Instance.Runtime.Port < 0 || Instance.Runtime.Port > 65535)
             {
                 exception = new ArgumentException("The valid range of the port number is from 0 to 65535.", "RUNTIME_PORT");

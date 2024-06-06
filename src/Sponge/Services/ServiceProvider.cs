@@ -23,7 +23,7 @@ namespace Sponge.Services
 
         #region ::Variables::
 
-        public Server Server { get; init; }
+        public Server? Server { get; private set; } = null;
 
         public Dictionary<string, IService> Services { get; init; }
 
@@ -35,7 +35,7 @@ namespace Sponge.Services
 
         private ServiceProvider()
         {
-            // INIT: Initialize services.
+            // SET-UP: Add services to the dictionary.
             Services = new Dictionary<string, IService>
             {
                 // DO NOT CHANGE THE ORDER OF SERVICES.
@@ -65,10 +65,6 @@ namespace Sponge.Services
                     routePaths.All((path) => Routes.TryAdd(path, route.Value));
                 }
             }
-
-            // INIT: Initialize a server.
-            var configurationService = Services["SVC_CONFIG"] as ConfigurationService;
-            Server = new Server(IPAddress.Any, configurationService?.Instance.Runtime.Port ?? 40126);
         }
 
         #endregion
@@ -77,22 +73,39 @@ namespace Sponge.Services
 
         public void Start()
         {
+            // INIT: Initialize services.
             foreach (var pair in Services)
             {
                 var service = pair.Value;
                 service.Start();
             }
 
-            Server.Start();
-
+            // INIT: Get an available port, and initialize a server.
             var configurationService = Services["SVC_CONFIG"] as ConfigurationService;
-            var port = configurationService?.Instance.Runtime.Port ?? 40126;
+            var port = configurationService?.Instance.Runtime.Port;
+
+            if (port == null || !NetworkHelper.IsPortAvailable((int)port))
+            {
+                if (configurationService?.Instance.Runtime.UseDynamicPort == true)
+                {
+                    port = NetworkHelper.GetAvailablePort(new Range(49152, 65535));
+                }
+                else
+                {
+                    Log.Fatal($"The port {port} is already in use. Unable to start a server.");
+                    Stop(-1);
+                }
+            }
+
+            Server = new Server(IPAddress.Any, (int)port!);
+            Server.Start();
 
             Log.Information($"Server listening on port: {port}");
             Log.Information("Press Enter to stop the server or '!' to restart the server...");
 
             for (; ; )
             {
+                Console.CursorVisible = false;
                 string? line = Console.ReadLine();
                 if (string.IsNullOrEmpty(line))
                     break;
@@ -124,7 +137,10 @@ namespace Sponge.Services
             }
             else
             {
-                Log.Error("The server has already stopped.");
+                if (exitCode != -1)
+                {
+                    Log.Error("The server has already stopped.");
+                }
             }
 
             foreach (var pair in Services.Reverse())

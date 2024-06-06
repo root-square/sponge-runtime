@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sponge.Entities.Messages
 {
-    internal class MessageCode
+    public enum MessageCode
     {
     }
 }

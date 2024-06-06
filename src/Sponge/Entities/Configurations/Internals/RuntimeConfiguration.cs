@@ -9,9 +9,6 @@ namespace Sponge.Entities.Configurations.Internals
 {
     public class RuntimeConfiguration
     {
-        [JsonPropertyName("mode")]
-        public int Mode { get; set; } = 0;
-
         [JsonPropertyName("port")]
         public int Port { get; set; } = 40126;
 
