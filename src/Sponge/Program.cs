@@ -3,6 +3,7 @@ using Serilog.Events;
 using Sponge.Services;
 using Sponge.Utilities;
 using System.Net;
+using System.Runtime.CompilerServices;
 
 namespace Sponge
 {

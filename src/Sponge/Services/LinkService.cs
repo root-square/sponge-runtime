@@ -12,7 +12,7 @@ namespace Sponge.Services
     {
         #region ::Variables::
 
-        public bool IsRoutable { get; set; } = true;
+        public bool IsRoutable { get; set; } = false;
 
         public Dictionary<Route, RouteDelegate> Routes { get; init; } = new Dictionary<Route, RouteDelegate>();
 

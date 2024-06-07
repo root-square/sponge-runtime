@@ -93,7 +93,7 @@ namespace Sponge.Services
                 else
                 {
                     Log.Fatal($"The port {port} is already in use. Unable to start a server.");
-                    Stop(-1);
+                    Stop();
                 }
             }
 
@@ -105,7 +105,6 @@ namespace Sponge.Services
 
             for (; ; )
             {
-                Console.CursorVisible = false;
                 string? line = Console.ReadLine();
                 if (string.IsNullOrEmpty(line))
                     break;
@@ -131,16 +130,16 @@ namespace Sponge.Services
 
         public void Stop(int exitCode = 0)
         {
-            if (Server?.Stop() == true)
+            try
             {
-                Log.Information("The server has been stopped successfully.");
-            }
-            else
-            {
-                if (exitCode != -1)
+                if (Server?.Stop() == true)
                 {
-                    Log.Error("The server has already stopped.");
+                    Log.Information("The server has been stopped successfully.");
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Unable to stop the server.");
             }
 
             foreach (var pair in Services.Reverse())

@@ -1,6 +1,7 @@
 ﻿using NetCoreServer;
 using Serilog;
 using Sponge.Entities.Configurations;
+using Sponge.Entities.Messages;
 using Sponge.Services.Abstractions;
 using Sponge.Utilities;
 using System;
@@ -48,7 +49,7 @@ namespace Sponge.Services
                     Exception? exception = null;
                     if (!Validate(out exception))
                     {
-                        Log.Error(exception, "Some configurations are invalid. Unable to load configurations.");
+                        Log.Error(exception, "Unable to load configurations.");
                         ServiceProvider.Instance.Stop(1);
                     }
                 }
@@ -203,14 +204,34 @@ namespace Sponge.Services
                     session.SendResponseAsync(session.Response.MakeTraceResponse(request.Cache.Data));
                     break;
                 case "OPTIONS":
-                    session.SendResponseAsync(session.Response.MakeOptionsResponse("HEAD,GET,OPTIONS,TRACE"));
+                    session.SendResponseAsync(session.Response.MakeOptionsResponse("HEAD,GET,PUT,DELETE,OPTIONS,TRACE"));
                     break;
                 case "GET":
-                    var json = JsonSerializer.Serialize(Instance, SourceGenerationContext.Default.Configuration);
-                    session.SendResponseAsync(session.Response.MakeGetResponse(json, "application/json; charset=UTF-8"));
+                    var getMessage = JsonSerializer.Serialize(new ConfigurationMessage(StatusCode.OK, "Request Successful", Instance), SourceGenerationContext.Default.ConfigurationMessage);
+                    session.SendResponseAsync(session.Response.MakeGetResponse(getMessage, "application/json; charset=UTF-8"));
+                    break;
+                case "PUT":
+                    try
+                    {
+                        var config = JsonSerializer.Deserialize(request.Body, SourceGenerationContext.Default.Configuration);
+                        var putMessage = JsonSerializer.Serialize(new GeneralMessage(StatusCode.OK, "Request Successful", null), SourceGenerationContext.Default.GeneralMessage);
+                        session.SendResponseAsync(session.Response.MakeGetResponse(putMessage, "application/json; charset=UTF-8"));
+                    }
+                    catch (Exception ex)
+                    {
+                        var putMessage = JsonSerializer.Serialize(new GeneralMessage(StatusCode.InternalServerError, "Internal Server Error", null), SourceGenerationContext.Default.GeneralMessage);
+                        session.SendResponseAsync(session.Response.MakeErrorResponse(500, putMessage, "application/json; charset=UTF-8"));
+                        Log.Error(ex, "An unknown error has occurred.");
+                    }
+                    break;
+                case "DELETE":
+                    Instance = new Configuration();
+                    var deleteMessage = JsonSerializer.Serialize(new GeneralMessage(StatusCode.OK, "Request Successful", string.Empty), SourceGenerationContext.Default.GeneralMessage);
+                    session.SendResponseAsync(session.Response.MakeGetResponse(deleteMessage, "application/json; charset=UTF-8"));
                     break;
                 default:
-                    session.SendResponseAsync(session.Response.MakeErrorResponse(501, "501 - Unsupported HTTP method: " + request.Method));
+                    var defaultMessage = JsonSerializer.Serialize(new GeneralMessage(StatusCode.NotImplemented, $"Unsupported HTTP Method: {request.Method}", string.Empty), SourceGenerationContext.Default.GeneralMessage);
+                    session.SendResponseAsync(session.Response.MakeErrorResponse(501, defaultMessage, "application/json; charset=UTF-8"));
                     break;
             }
         }
