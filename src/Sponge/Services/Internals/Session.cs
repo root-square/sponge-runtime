@@ -1,5 +1,6 @@
 ﻿using NetCoreServer;
 using Serilog;
+using Sponge.Entities.Responses;
 using Sponge.Services.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,10 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Sponge.Services.Internals
 {
@@ -30,11 +33,21 @@ namespace Sponge.Services.Internals
 
             if (_routes.TryGetValue(path.ToLower(), out requestHandler))
             {
-                requestHandler(this, request);
+                try
+                {
+                    requestHandler(this, request);
+                }
+                catch (Exception ex)
+                {
+                    var errorResponse = JsonSerializer.Serialize(new Response(ResponseCode.InternalServerError, "SESSION_INTERNAL_SERVER_ERROR"), SourceGenerationContext.Default.Response);
+                    SendResponseAsync(Response.MakeErrorResponse(500, errorResponse, "application/json; charset=UTF-8"));
+                    Log.Error(ex, "An unknown exception has occurred. Unable to process the request.");
+                }
             }
             else
             {
-                SendResponseAsync(Response.MakeErrorResponse(404, content: "404 - File Not Found"));
+                var errorResponse = JsonSerializer.Serialize(new Response(ResponseCode.NotFound, "SESSION_FILE_NOT_FOUND"), SourceGenerationContext.Default.Response);
+                SendResponseAsync(Response.MakeErrorResponse(404, errorResponse, "application/json; charset=UTF-8"));
             }
         }
 

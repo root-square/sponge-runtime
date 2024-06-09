@@ -13,13 +13,13 @@ namespace Sponge.Entities.Responses
         [JsonPropertyName("status")]
         public virtual ResponseCode Status { get; set; } = ResponseCode.OK;
 
-        [JsonPropertyName("summary")]
-        public virtual string Summary { get; set; } = string.Empty;
+        [JsonPropertyName("message")]
+        public virtual string Message { get; set; } = string.Empty;
 
-        public Response(ResponseCode status, string summary)
+        public Response(ResponseCode status, string message)
         {
             Status = status;
-            Summary = summary;
+            Message = message;
         }
     }
 }

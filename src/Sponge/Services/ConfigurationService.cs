@@ -219,7 +219,7 @@ namespace Sponge.Services
                     }
                     catch (Exception ex)
                     {
-                        var putResponse = JsonSerializer.Serialize(new Response(ResponseCode.InternalServerError, "Internal Server Error"), SourceGenerationContext.Default.Response);
+                        var putResponse = JsonSerializer.Serialize(new Response(ResponseCode.InternalServerError, "CONFIGURATION_SERVICE_INTERNAL_SERVER_ERROR"), SourceGenerationContext.Default.Response);
                         session.SendResponseAsync(session.Response.MakeErrorResponse(500, putResponse, "application/json; charset=UTF-8"));
                         Log.Error(ex, "Unable to write configurations.");
                     }

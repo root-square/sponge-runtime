@@ -13,10 +13,10 @@ namespace Sponge.Entities.Responses
         [JsonPropertyName("content")]
         public Configuration Content { get; set; } = new Configuration();
 
-        public ConfigurationResponse(ResponseCode status, string summary, Configuration content) : base(status, summary)
+        public ConfigurationResponse(ResponseCode status, string message, Configuration content) : base(status, message)
         {
             Status = status;
-            Summary = summary;
+            Message = message;
             Content = content;
         }
     }

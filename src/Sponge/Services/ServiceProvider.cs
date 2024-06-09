@@ -65,6 +65,14 @@ namespace Sponge.Services
                     routePaths.All((path) => Routes.TryAdd(path, route.Value));
                 }
             }
+
+            // INIT: Initialize an unhandled exception handler.
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                var exception = e.ExceptionObject as Exception;
+                Log.Fatal(exception ?? new Exception("Failed to load an exception information."), "An unhandled exception has occurred.");
+                Stop();
+            };
         }
 
         #endregion
