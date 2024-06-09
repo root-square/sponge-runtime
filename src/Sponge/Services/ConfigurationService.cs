@@ -1,7 +1,7 @@
 ﻿using NetCoreServer;
 using Serilog;
 using Sponge.Entities.Configurations;
-using Sponge.Entities.Messages;
+using Sponge.Entities.Responses;
 using Sponge.Services.Abstractions;
 using Sponge.Utilities;
 using System;
@@ -207,31 +207,31 @@ namespace Sponge.Services
                     session.SendResponseAsync(session.Response.MakeOptionsResponse("HEAD,GET,PUT,DELETE,OPTIONS,TRACE"));
                     break;
                 case "GET":
-                    var getMessage = JsonSerializer.Serialize(new ConfigurationMessage(StatusCode.OK, "Request Successful", Instance), SourceGenerationContext.Default.ConfigurationMessage);
-                    session.SendResponseAsync(session.Response.MakeGetResponse(getMessage, "application/json; charset=UTF-8"));
+                    var getResponse = JsonSerializer.Serialize(new ConfigurationResponse(ResponseCode.OK, "CONFIGURATION_SERVICE_API_READ", Instance), SourceGenerationContext.Default.ConfigurationResponse);
+                    session.SendResponseAsync(session.Response.MakeGetResponse(getResponse, "application/json; charset=UTF-8"));
                     break;
                 case "PUT":
                     try
                     {
                         var config = JsonSerializer.Deserialize(request.Body, SourceGenerationContext.Default.Configuration);
-                        var putMessage = JsonSerializer.Serialize(new GeneralMessage(StatusCode.OK, "Request Successful", null), SourceGenerationContext.Default.GeneralMessage);
-                        session.SendResponseAsync(session.Response.MakeGetResponse(putMessage, "application/json; charset=UTF-8"));
+                        var putResponse = JsonSerializer.Serialize(new Response(ResponseCode.OK, "CONFIGURATION_SERVICE_API_WRITE"), SourceGenerationContext.Default.Response);
+                        session.SendResponseAsync(session.Response.MakeGetResponse(putResponse, "application/json; charset=UTF-8"));
                     }
                     catch (Exception ex)
                     {
-                        var putMessage = JsonSerializer.Serialize(new GeneralMessage(StatusCode.InternalServerError, "Internal Server Error", null), SourceGenerationContext.Default.GeneralMessage);
-                        session.SendResponseAsync(session.Response.MakeErrorResponse(500, putMessage, "application/json; charset=UTF-8"));
-                        Log.Error(ex, "An unknown error has occurred.");
+                        var putResponse = JsonSerializer.Serialize(new Response(ResponseCode.InternalServerError, "Internal Server Error"), SourceGenerationContext.Default.Response);
+                        session.SendResponseAsync(session.Response.MakeErrorResponse(500, putResponse, "application/json; charset=UTF-8"));
+                        Log.Error(ex, "Unable to write configurations.");
                     }
                     break;
                 case "DELETE":
                     Instance = new Configuration();
-                    var deleteMessage = JsonSerializer.Serialize(new GeneralMessage(StatusCode.OK, "Request Successful", string.Empty), SourceGenerationContext.Default.GeneralMessage);
-                    session.SendResponseAsync(session.Response.MakeGetResponse(deleteMessage, "application/json; charset=UTF-8"));
+                    var deleteResponse = JsonSerializer.Serialize(new Response(ResponseCode.OK, "CONFIGURATION_SERVICE_API_RESET"), SourceGenerationContext.Default.Response);
+                    session.SendResponseAsync(session.Response.MakeGetResponse(deleteResponse, "application/json; charset=UTF-8"));
                     break;
                 default:
-                    var defaultMessage = JsonSerializer.Serialize(new GeneralMessage(StatusCode.NotImplemented, $"Unsupported HTTP Method: {request.Method}", string.Empty), SourceGenerationContext.Default.GeneralMessage);
-                    session.SendResponseAsync(session.Response.MakeErrorResponse(501, defaultMessage, "application/json; charset=UTF-8"));
+                    var defaultResponse = JsonSerializer.Serialize(new Response(ResponseCode.NotImplemented, $"Unsupported HTTP Method: {request.Method}"), SourceGenerationContext.Default.Response);
+                    session.SendResponseAsync(session.Response.MakeErrorResponse(501, defaultResponse, "application/json; charset=UTF-8"));
                     break;
             }
         }

@@ -28,7 +28,7 @@ namespace Sponge.Services
         public void Start()
         {
             string fileName = Path.Combine(VariableBuilder.GetBaseDirectory(), @"logs\.log");
-            string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u3}] {Message}{NewLine}{Exception}";
+            string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u3}] {Response}{NewLine}{Exception}";
 
             var log = new LoggerConfiguration()
                 .WriteTo.Async(sink => sink.Console(restrictedToMinimumLevel: LogEventLevel.Verbose, outputTemplate: outputTemplateString))

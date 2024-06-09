@@ -6,20 +6,14 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Sponge.Entities.Messages
+namespace Sponge.Entities.Responses
 {
-    internal class ConfigurationMessage
+    internal class ConfigurationResponse : Response
     {
-        [JsonPropertyName("status")]
-        public StatusCode Status { get; set; } = StatusCode.OK;
-
-        [JsonPropertyName("summary")]
-        public string Summary { get; set; } = string.Empty;
-
         [JsonPropertyName("content")]
         public Configuration Content { get; set; } = new Configuration();
 
-        public ConfigurationMessage(StatusCode status, string summary, Configuration content)
+        public ConfigurationResponse(ResponseCode status, string summary, Configuration content) : base(status, summary)
         {
             Status = status;
             Summary = summary;

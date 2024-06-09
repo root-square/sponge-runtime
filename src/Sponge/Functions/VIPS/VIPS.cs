@@ -10,7 +10,7 @@ namespace Sponge.Functions.VIPS
     /// <summary>
     /// Provides image functions based on libvips.
     /// </summary>
-    public static class VIPS
+    public static class Vips
     {
         /// <summary>
         /// Convert the image to AVIF format. <br/>

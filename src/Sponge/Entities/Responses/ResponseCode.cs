@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sponge.Entities.Messages
+namespace Sponge.Entities.Responses
 {
-    public enum StatusCode
+    public enum ResponseCode
     {
         Continue = 100,
         SwitchingProtocols = 101,
