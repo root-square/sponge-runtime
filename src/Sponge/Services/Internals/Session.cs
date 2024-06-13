@@ -19,9 +19,9 @@ namespace Sponge.Services.Internals
     {
         private Dictionary<string, RouteDelegate> _routes = new Dictionary<string, RouteDelegate>();
 
-        public Session(HttpServer server) : base(server)
+        public Session(HttpServer server, Dictionary<string, RouteDelegate> routes) : base(server)
         {
-            _routes = ServiceProvider.Instance.Routes;
+            _routes = routes;
         }
 
         protected override void OnReceivedRequest(HttpRequest request)
@@ -53,12 +53,12 @@ namespace Sponge.Services.Internals
 
         protected override void OnReceivedRequestError(HttpRequest request, string error)
         {
-            Console.WriteLine($"HTTP request error: {error}");
+            Log.Error($"HTTP request error: {error}");
         }
 
         protected override void OnError(SocketError error)
         {
-            Console.WriteLine($"HTTP session caught an error: {error}");
+            Log.Error($"HTTP session caught an error: {error}");
         }
     }
 }

@@ -10,42 +10,23 @@ using System.Threading.Tasks;
 
 namespace Sponge.Services
 {
-    public class DiagnosticsService : IService
+    public class DiagnosticsService : Service
     {
-        #region ::Variables::
-
-        public bool IsRoutable { get; set; } = true;
-
-        public Dictionary<Route, RouteDelegate> Routes { get; init; } = new Dictionary<Route, RouteDelegate>();
-
-        public Configuration Instance { get; private set; } = new Configuration();
-
-        #endregion
-
-        #region ::Constructors::
-
-        public DiagnosticsService()
+        public DiagnosticsService() : base(isRoutable: true)
         {
             Routes.Add(new Route("/api/status"), HandleStatusRequest);
+            Routes.Add(new Route("/api/doctor"), HandleDoctorRequest);
         }
 
-        #endregion
-
-        #region ::Functions::
-
-        public void Start()
+        public override void Start()
         {
 
         }
 
-        public void Stop()
+        public override void Stop()
         {
 
         }
-
-        #endregion
-
-        #region ::Handlers::
 
         private void HandleStatusRequest(HttpSession session, HttpRequest request)
         {
@@ -61,8 +42,7 @@ namespace Sponge.Services
                     session.SendResponseAsync(session.Response.MakeOptionsResponse("HEAD,GET,OPTIONS,TRACE"));
                     break;
                 case "GET":
-                    var json = JsonSerializer.Serialize(Instance, SourceGenerationContext.Default.Configuration);
-                    session.SendResponseAsync(session.Response.MakeGetResponse(json, "application/json; charset=UTF-8"));
+                    session.SendResponseAsync(session.Response.MakeErrorResponse(501, "501 - Unsupported HTTP method: " + request.Method));
                     break;
                 default:
                     session.SendResponseAsync(session.Response.MakeErrorResponse(501, "501 - Unsupported HTTP method: " + request.Method));
@@ -70,41 +50,26 @@ namespace Sponge.Services
             }
         }
 
-        #endregion
-
-        #region ::IDisposable Components::
-
-        private bool _disposedValue;
-
-        protected virtual void Dispose(bool disposing)
+        private void HandleDoctorRequest(HttpSession session, HttpRequest request)
         {
-            if (!_disposedValue)
+            switch (request.Method)
             {
-                if (disposing)
-                {
-                    // TODO: Remove managed resources.
-                }
-
-                // TODO: Release unmanaged resources, and re-define the destructor.
-                // TODO: Set large fields to null.
-                _disposedValue = true;
+                case "HEAD":
+                    session.SendResponseAsync(session.Response.MakeHeadResponse());
+                    break;
+                case "TRACE":
+                    session.SendResponseAsync(session.Response.MakeTraceResponse(request.Cache.Data));
+                    break;
+                case "OPTIONS":
+                    session.SendResponseAsync(session.Response.MakeOptionsResponse("HEAD,GET,OPTIONS,TRACE"));
+                    break;
+                case "GET":
+                    session.SendResponseAsync(session.Response.MakeErrorResponse(501, "501 - Unsupported HTTP method: " + request.Method));
+                    break;
+                default:
+                    session.SendResponseAsync(session.Response.MakeErrorResponse(501, "501 - Unsupported HTTP method: " + request.Method));
+                    break;
             }
         }
-
-        // // TODO: Only if 'Dispose(bool disposing)' contains a logic to release unmanaged resources, re-define the destructor. 
-        // ~DiagnosticsService()
-        // {
-        //     // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
-        //     Dispose(disposing: false);
-        // }
-
-        public void Dispose()
-        {
-            // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
     }
 }

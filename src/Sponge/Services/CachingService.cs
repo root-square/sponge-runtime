@@ -1,4 +1,7 @@
-﻿using Sponge.Entities.Configurations;
+﻿using BitFaster.Caching;
+using BitFaster.Caching.Lfu;
+using BitFaster.Caching.Lru;
+using Sponge.Entities.Configurations;
 using Sponge.Services.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -8,74 +11,48 @@ using System.Threading.Tasks;
 
 namespace Sponge.Services
 {
-    public class CachingService : IService
+    public class CachingService : Service
     {
-        #region ::Variables::
+        public IAsyncCache<string, byte[]>? Instance { get; private set; }
 
-        public bool IsRoutable { get; set; } = true;
-
-        public Dictionary<Route, RouteDelegate> Routes { get; init; } = new Dictionary<Route, RouteDelegate>();
-
-        public Configuration Instance { get; private set; } = new Configuration();
-
-        #endregion
-
-        #region ::Constructors::
-
-        public CachingService()
+        public CachingService() : base(isRoutable: true)
         {
             //Routes.Add(new Route("/api/cache"), HandleStatusRequest);
         }
 
-        #endregion
-
-        #region ::Functions::
-
-        public void Start()
+        public override void Start()
         {
+            var a = ServiceProvider.Instance.Services["SVC_LOGGING"];
 
+            IsInitialized = true;
         }
 
-        public void Stop()
+        public override void Stop()
         {
-
+            IsInitialized = false;
         }
 
-        #endregion
-
-        #region ::IDisposable Components::
-
-        private bool _disposedValue;
-
-        protected virtual void Dispose(bool disposing)
+        private IAsyncCache<string, byte[]> BuildLRUCache(int capacity, int expirationInterval = 10)
         {
-            if (!_disposedValue)
-            {
-                if (disposing)
-                {
-                    // TODO: Remove managed resources.
-                }
+            var cache = new ConcurrentLruBuilder<string, byte[]>()
+                .WithCapacity(capacity)
+                .WithAtomicGetOrAdd()
+                .WithExpireAfterWrite(TimeSpan.FromMinutes(expirationInterval))
+                .AsAsyncCache()
+                .Build();
 
-                // TODO: Release unmanaged resources, and re-define the destructor.
-                // TODO: Set large fields to null.
-                _disposedValue = true;
-            }
+            return cache;
         }
 
-        // // TODO: Only if 'Dispose(bool disposing)' contains a logic to release unmanaged resources, re-define the destructor. 
-        // ~CachingService()
-        // {
-        //     // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
-        //     Dispose(disposing: false);
-        // }
-
-        public void Dispose()
+        private IAsyncCache<string, byte[]> BuildLFUCache(int capacity)
         {
-            // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
+            var cache = new ConcurrentLfuBuilder<string, byte[]>()
+                .WithCapacity(capacity)
+                .WithAtomicGetOrAdd()
+                .AsAsyncCache()
+                .Build();
 
-        #endregion
+            return cache;
+        }
     }
 }

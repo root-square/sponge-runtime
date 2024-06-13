@@ -13,30 +13,16 @@ using System.Threading.Tasks;
 
 namespace Sponge.Services
 {
-    public class ConfigurationService : IService
+    public class ConfigurationService : Service
     {
-        #region ::Variables::
-
-        public bool IsRoutable { get; set; } = true;
-
-        public Dictionary<Route, RouteDelegate> Routes { get; init; } = new Dictionary<Route, RouteDelegate>();
-
         public Configuration Instance { get; private set; } = new Configuration();
 
-        #endregion
-
-        #region ::Constructors::
-
-        public ConfigurationService()
+        public ConfigurationService() : base(isRoutable: true)
         {
             Routes.Add(new Route("/api/config"), HandleConfigRequest);
         }
 
-        #endregion
-
-        #region ::Functions::
-
-        public void Start()
+        public override void Start()
         {
             try
             {
@@ -68,7 +54,7 @@ namespace Sponge.Services
             }
         }
 
-        public void Stop()
+        public override void Stop()
         {
             try
             {
@@ -90,7 +76,7 @@ namespace Sponge.Services
             }
         }
 
-        public bool Validate(out Exception? exception)
+        private bool Validate(out Exception? exception)
         {
             exception = null;
 
@@ -189,10 +175,6 @@ namespace Sponge.Services
             return exception == null;
         }
 
-        #endregion
-
-        #region ::Handlers::
-
         private void HandleConfigRequest(HttpSession session, HttpRequest request)
         {
             switch (request.Method)
@@ -235,42 +217,5 @@ namespace Sponge.Services
                     break;
             }
         }
-
-        #endregion
-
-        #region ::IDisposable Components::
-
-        private bool _disposedValue;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposedValue)
-            {
-                if (disposing)
-                {
-                    // TODO: Remove managed resources.
-                }
-
-                // TODO: Release unmanaged resources, and re-define the destructor.
-                // TODO: Set large fields to null.
-                _disposedValue = true;
-            }
-        }
-
-        // // TODO: Only if 'Dispose(bool disposing)' contains a logic to release unmanaged resources, re-define the destructor. 
-        // ~ConfigurationService()
-        // {
-        //     // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
-        //     Dispose(disposing: false);
-        // }
-
-        public void Dispose()
-        {
-            // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
     }
 }

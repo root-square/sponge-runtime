@@ -13,19 +13,11 @@ using System.Threading.Tasks;
 
 namespace Sponge.Services
 {
-    public class LoggingService : IService
+    public class LoggingService : Service
     {
-        #region ::Variables::
+        public LoggingService() : base(isRoutable: false) { }
 
-        public bool IsRoutable { get; set; } = false;
-
-        public Dictionary<Route, RouteDelegate> Routes { get; init; } = new Dictionary<Route, RouteDelegate>();
-
-        #endregion
-
-        #region ::Functions::
-
-        public void Start()
+        public override void Start()
         {
             string fileName = Path.Combine(VariableBuilder.GetBaseDirectory(), @"logs\.log");
             string outputTemplateString = "{Timestamp:HH:mm:ss.ms} [{Level:u3}] {Message}{NewLine}{Exception}";
@@ -40,46 +32,9 @@ namespace Sponge.Services
 
         }
 
-        public void Stop()
+        public override void Stop()
         {
             Log.CloseAndFlush();
         }
-
-        #endregion
-
-        #region ::IDisposable Components::
-
-        private bool _disposedValue;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposedValue)
-            {
-                if (disposing)
-                {
-                    // TODO: Remove managed resources.
-                }
-
-                // TODO: Release unmanaged resources, and re-define the destructor.
-                // TODO: Set large fields to null.
-                _disposedValue = true;
-            }
-        }
-
-        // // TODO: Only if 'Dispose(bool disposing)' contains a logic to release unmanaged resources, re-define the destructor. 
-        // ~LoggingService()
-        // {
-        //     // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
-        //     Dispose(disposing: false);
-        // }
-
-        public void Dispose()
-        {
-            // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
     }
 }

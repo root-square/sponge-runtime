@@ -16,25 +16,25 @@ namespace Sponge.Functions.SOC
             {
                 if (disposing)
                 {
-                    // TODO: 관리형 상태(관리형 개체)를 삭제합니다.
+                    // TODO: Remove managed resources.
                 }
 
-                // TODO: 비관리형 리소스(비관리형 개체)를 해제하고 종료자를 재정의합니다.
-                // TODO: 큰 필드를 null로 설정합니다.
+                // TODO: Release unmanaged resources, and re-define the destructor.
+                // TODO: Set large fields to null.
                 _disposedValue = true;
             }
         }
 
-        // // TODO: 비관리형 리소스를 해제하는 코드가 'Dispose(bool disposing)'에 포함된 경우에만 종료자를 재정의합니다.
+        // // TODO: Only if 'Dispose(bool disposing)' contains a logic to release unmanaged resources, re-define the destructor. 
         // ~SocReader()
         // {
-        //     // 이 코드를 변경하지 마세요. 'Dispose(bool disposing)' 메서드에 정리 코드를 입력합니다.
+        //     // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
         //     Dispose(disposing: false);
         // }
 
         public void Dispose()
         {
-            // 이 코드를 변경하지 마세요. 'Dispose(bool disposing)' 메서드에 정리 코드를 입력합니다.
+            // DO NOT CHANGE THIS CODE. It inputs a disposing code to the 'Dispose(bool disposing)' method.
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }

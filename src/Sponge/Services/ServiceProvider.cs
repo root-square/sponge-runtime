@@ -11,34 +11,40 @@ using System.Threading.Tasks;
 
 namespace Sponge.Services
 {
+    /// <summary>
+    /// Manages <see cref="Service">services</see> for Sponge, and provides a runtime environment server.
+    /// </summary>
     public class ServiceProvider
     {
-        #region ::Singleton Components::
-
+        /// <summary>
+        /// A lazy instance to provide a singleton instance.
+        /// </summary>
         private static readonly Lazy<ServiceProvider> _lazy = new Lazy<ServiceProvider>(() => new ServiceProvider());
 
+        /// <summary>
+        /// The singleton instance of the <see cref="ServiceProvider"/>.
+        /// </summary>
         public static ServiceProvider Instance => _lazy.Value;
 
-        #endregion
-
-        #region ::Variables::
-
+        /// <summary>
+        /// The server instance which is the <see cref="ServiceProvider"/> using.
+        /// </summary>
         public Server? Server { get; private set; } = null;
 
-        public Dictionary<string, IService> Services { get; init; }
+        /// <summary>
+        /// The services are provided by the <see cref="ServiceProvider"/>.
+        /// </summary>
+        public Dictionary<string, Service> Services { get; init; }
 
-        public Dictionary<string, RouteDelegate> Routes { get; init; }
-
-        #endregion
-
-        #region ::Constructor::
-
+        /// <summary>
+        /// Initialize an instance of <see cref="ServiceProvider"/>.
+        /// </summary>
         private ServiceProvider()
         {
             // SET-UP: Add services to the dictionary.
-            Services = new Dictionary<string, IService>
+            Services = new Dictionary<string, Service>
             {
-                // DO NOT CHANGE THE ORDER OF SERVICES.
+                // WARNING: DO NOT CHANGE THE ORDER OF SERVICES. A fatal error can be occurred.
                 { "SVC_LOGGING", new LoggingService() },
                 { "SVC_CONFIG", new ConfigurationService() },
                 { "SVC_DIAGNOSTICS", new DiagnosticsService() },
@@ -47,24 +53,6 @@ namespace Sponge.Services
                 { "SVC_AUDIO", new AudioService() },
                 { "SVC_IMAGE", new ImageService() }
             };
-
-            // INIT: Initialize a routing table.
-            Routes = new Dictionary<string, RouteDelegate>();
-
-            foreach (var service in Services)
-            {
-                if (!service.Value.IsRoutable)
-                {
-                    continue;
-                }
-
-                var routes = service.Value.Routes;
-                foreach (var route in routes)
-                {
-                    var routePaths = route.Key.ToArray();
-                    routePaths.All((path) => Routes.TryAdd(path, route.Value));
-                }
-            }
 
             // INIT: Initialize an unhandled exception handler.
             AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
@@ -75,20 +63,37 @@ namespace Sponge.Services
             };
         }
 
-        #endregion
-
-        #region ::Functions::
-
+        /// <summary>
+        /// Start the <see cref="ServiceProvider"/>.
+        /// </summary>
         public void Start()
         {
-            // INIT: Initialize services.
+            // INIT: Start services.
             foreach (var pair in Services)
             {
                 var service = pair.Value;
                 service.Start();
             }
 
-            // INIT: Get an available port, and initialize a server.
+            // INIT: Initialize a routing table.
+            var routes = new Dictionary<string, RouteDelegate>();
+
+            foreach (var service in Services)
+            {
+                if (!service.Value.IsRoutable)
+                {
+                    continue;
+                }
+
+                var subroutes = service.Value.Routes;
+                foreach (var subroute in subroutes)
+                {
+                    var routeKeys = subroute.Key.ToArray();
+                    routeKeys.All((key) => routes.TryAdd(key, subroute.Value));
+                }
+            }
+
+            // INIT: Get an available port.
             var configurationService = Services["SVC_CONFIG"] as ConfigurationService;
             var port = configurationService?.Instance.Runtime.Port;
 
@@ -105,7 +110,8 @@ namespace Sponge.Services
                 }
             }
 
-            Server = new Server(IPAddress.Any, (int)port!);
+            // INIT: Start the server, and listen user inputs.
+            Server = new Server(IPAddress.Any, (int)port!, routes);
             Server.Start();
 
             Log.Information($"Server listening on port: {port}");
@@ -124,6 +130,9 @@ namespace Sponge.Services
             }
         }
 
+        /// <summary>
+        /// Restart the <see cref="ServiceProvider"/>.
+        /// </summary>
         public void Restart()
         {
             if (Server?.Restart() == true)
@@ -136,6 +145,10 @@ namespace Sponge.Services
             }
         }
 
+        /// <summary>
+        /// Stop the <see cref="ServiceProvider"/>.
+        /// </summary>
+        /// <param name="exitCode">An exit code to emit</param>
         public void Stop(int exitCode = 0)
         {
             try
@@ -154,12 +167,9 @@ namespace Sponge.Services
             {
                 var service = pair.Value;
                 service.Stop();
-                service.Dispose();
             }
 
             Environment.Exit(exitCode);
         }
-
-        #endregion
     }
 }
