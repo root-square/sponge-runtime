@@ -15,7 +15,10 @@ namespace Sponge.Services
 {
     public class LoggingService : Service
     {
-        public LoggingService() : base(isRoutable: false) { }
+        public LoggingService() : base(isRoutable: false)
+        {
+            IsInitialized = true;
+        }
 
         public override void Start()
         {
@@ -29,12 +32,14 @@ namespace Sponge.Services
 
             Log.Logger = log;
 
-
+            IsRunning = true;
         }
 
         public override void Stop()
         {
             Log.CloseAndFlush();
+
+            IsRunning = false;
         }
     }
 }

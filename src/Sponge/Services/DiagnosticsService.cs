@@ -16,16 +16,17 @@ namespace Sponge.Services
         {
             Routes.Add(new Route("/api/status"), HandleStatusRequest);
             Routes.Add(new Route("/api/doctor"), HandleDoctorRequest);
+            IsInitialized = true;
         }
 
         public override void Start()
         {
-
+            IsRunning = true;
         }
 
         public override void Stop()
         {
-
+            IsRunning = false;
         }
 
         private void HandleStatusRequest(HttpSession session, HttpRequest request)

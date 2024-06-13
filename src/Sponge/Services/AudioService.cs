@@ -15,17 +15,17 @@ namespace Sponge.Services
     {
         public AudioService() : base(isRoutable: false)
         {
-            
+            IsInitialized = true;
         }
 
         public override void Start()
         {
-            
+            IsRunning = true;
         }
 
         public override void Stop()
         {
-
+            IsRunning = false;
         }
     }
 }

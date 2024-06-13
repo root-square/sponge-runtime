@@ -20,6 +20,7 @@ namespace Sponge.Services
         public ConfigurationService() : base(isRoutable: true)
         {
             Routes.Add(new Route("/api/config"), HandleConfigRequest);
+            IsInitialized = true;
         }
 
         public override void Start()
@@ -28,8 +29,8 @@ namespace Sponge.Services
             {
                 if (Path.Exists(VariableBuilder.GetConfigurationPath()))
                 {
-                    var json = TextFileHelper.ReadTextFile(VariableBuilder.GetConfigurationPath(), Encoding.UTF8);
-                    json = Encoding.UTF8.GetString(Convert.FromBase64String(json));
+                    var raw = TextFileHelper.ReadTextFile(VariableBuilder.GetConfigurationPath(), Encoding.UTF8);
+                    var json = Encoding.UTF8.GetString(Convert.FromBase64String(raw));
                     Instance = JsonSerializer.Deserialize(json, SourceGenerationContext.Default.Configuration) ?? new Configuration();
 
                     Exception? exception = null;
@@ -38,6 +39,8 @@ namespace Sponge.Services
                         Log.Error(exception, "Unable to load configurations.");
                         ServiceProvider.Instance.Stop(1);
                     }
+
+                    IsRunning = true;
                 }
             }
             catch (UnauthorizedAccessException ex)
@@ -73,6 +76,10 @@ namespace Sponge.Services
             catch (Exception ex)
             {
                 Log.Error(ex, "An unknown exception has occurred.");
+            }
+            finally
+            {
+                IsRunning = false;
             }
         }
 

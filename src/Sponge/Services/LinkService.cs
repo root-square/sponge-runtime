@@ -12,17 +12,17 @@ namespace Sponge.Services
     {
         public LinkService() : base(isRoutable: false)
         {
-
+            IsInitialized = true;
         }
 
         public override void Start()
         {
-
+            IsRunning = true;
         }
 
         public override void Stop()
         {
-
+            IsRunning = false;
         }
     }
 }

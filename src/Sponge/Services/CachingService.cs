@@ -18,18 +18,19 @@ namespace Sponge.Services
         public CachingService() : base(isRoutable: true)
         {
             //Routes.Add(new Route("/api/cache"), HandleStatusRequest);
+            IsInitialized = true;
         }
 
         public override void Start()
         {
             var a = ServiceProvider.Instance.Services["SVC_LOGGING"];
 
-            IsInitialized = true;
+            IsRunning = true;
         }
 
         public override void Stop()
         {
-            IsInitialized = false;
+            IsRunning = false;
         }
 
         private IAsyncCache<string, byte[]> BuildLRUCache(int capacity, int expirationInterval = 10)

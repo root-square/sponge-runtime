@@ -17,6 +17,7 @@ namespace Sponge.Services
         public ImageService() : base(isRoutable: true)
         {
             //Routes.Add(new Route("/api/image"), HandleConfigRequest);
+            IsInitialized = true;
         }
 
         public override void Start()
@@ -29,6 +30,8 @@ namespace Sponge.Services
 
                 ServiceProvider.Instance.Stop();
             }
+
+            IsRunning = true;
         }
 
         public override void Stop()
@@ -37,6 +40,8 @@ namespace Sponge.Services
             {
                 NetVips.NetVips.Shutdown();
             }
+
+            IsRunning = false;
         }
     }
 }
