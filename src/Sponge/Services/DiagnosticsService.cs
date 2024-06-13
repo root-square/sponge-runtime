@@ -12,7 +12,7 @@ namespace Sponge.Services
 {
     public class DiagnosticsService : Service
     {
-        public DiagnosticsService() : base(isRoutable: true)
+        public DiagnosticsService(ServiceProvider provider) : base(provider, isRoutable: true)
         {
             Routes.Add(new Route("/api/status"), HandleStatusRequest);
             Routes.Add(new Route("/api/doctor"), HandleDoctorRequest);

@@ -10,6 +10,8 @@ namespace Sponge.Services.Abstractions
 {
     public abstract class Service
     {
+        public ServiceProvider? Provider { get; set; } = null;
+
         public bool IsInitialized { get; set; } = false;
 
         public bool IsRunning { get; set; } = false;
@@ -18,8 +20,9 @@ namespace Sponge.Services.Abstractions
 
         public Dictionary<Route, RouteDelegate> Routes { get; } = new Dictionary<Route, RouteDelegate>();
 
-        public Service(bool isRoutable) 
+        public Service(ServiceProvider provider, bool isRoutable) 
         {
+            Provider = provider;
             IsRoutable = isRoutable;
         }
 

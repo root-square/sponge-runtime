@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Sponge.Functions.SOC.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +11,12 @@ namespace Sponge.Functions.SOC
     public class SocReader : IDisposable
     {
         private bool _disposedValue;
+
+        public void Read()
+        {
+            var a = Marshal.PtrToStructure<SocV1>(IntPtr.Zero);
+            Marshal.StructureToPtr<SocV1>(a, IntPtr.Zero, true);
+        }
 
         protected virtual void Dispose(bool disposing)
         {

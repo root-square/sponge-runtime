@@ -14,7 +14,7 @@ namespace Sponge.Services
 {
     public class ImageService : Service
     {
-        public ImageService() : base(isRoutable: true)
+        public ImageService(ServiceProvider provider) : base(provider, isRoutable: true)
         {
             //Routes.Add(new Route("/api/image"), HandleConfigRequest);
             IsInitialized = true;

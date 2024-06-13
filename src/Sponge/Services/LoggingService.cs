@@ -15,7 +15,7 @@ namespace Sponge.Services
 {
     public class LoggingService : Service
     {
-        public LoggingService() : base(isRoutable: false)
+        public LoggingService(ServiceProvider provider) : base(provider, isRoutable: false)
         {
             IsInitialized = true;
         }

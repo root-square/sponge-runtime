@@ -12,9 +12,6 @@ namespace Sponge.Entities.Configurations.Internals
         [JsonPropertyName("enable")]
         public bool Enable { get; set; } = true;
 
-        [JsonPropertyName("priority")]
-        public int Priority { get; set; } = 1; // Note: 0 = BEFORE RUNTIME START-UP / 1 = AFTER RUNTIME START-UP
-
         [JsonPropertyName("target")]
         public string? Target { get; set; } = "base.bin";
 

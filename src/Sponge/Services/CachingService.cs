@@ -15,7 +15,7 @@ namespace Sponge.Services
     {
         public IAsyncCache<string, byte[]>? Instance { get; private set; }
 
-        public CachingService() : base(isRoutable: true)
+        public CachingService(ServiceProvider provider) : base(provider, isRoutable: true)
         {
             //Routes.Add(new Route("/api/cache"), HandleStatusRequest);
             IsInitialized = true;

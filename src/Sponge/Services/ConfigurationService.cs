@@ -17,7 +17,7 @@ namespace Sponge.Services
     {
         public Configuration Instance { get; private set; } = new Configuration();
 
-        public ConfigurationService() : base(isRoutable: true)
+        public ConfigurationService(ServiceProvider provider) : base(provider, isRoutable: true)
         {
             Routes.Add(new Route("/api/config"), HandleConfigRequest);
             IsInitialized = true;
@@ -99,19 +99,9 @@ namespace Sponge.Services
 
             if (Instance.Link.Enable)
             {
-                if (!(Instance.Link.Priority == 0 || Instance.Link.Priority == 1))
-                {
-                    exception = new ArgumentException("Unable to parse a configuration item.", "LINK_PRIORITY");
-                }
-
                 if (string.IsNullOrEmpty(Instance.Link.Target))
                 {
                     exception = new ArgumentException("The link target cannot be null or empty.", "LINK_TARGET");
-                }
-
-                if (!File.Exists(Instance.Link.Target))
-                {
-                    exception = new ArgumentException("The link target cannot be found.", "LINK_TARGET");
                 }
             }
 
@@ -119,7 +109,7 @@ namespace Sponge.Services
             {
                 if (!(Instance.Caching.Strategy == "lru" || Instance.Caching.Strategy ==  "lfu"))
                 {
-                    exception = new ArgumentException("An invalid caching strategy was inputted.", "CACHING_STRATEGY");
+                    exception = new ArgumentException("An invalid caching strategy has been inputted.", "CACHING_STRATEGY");
                 }
 
                 if (Instance.Caching.Capacity < 100 || Instance.Caching.Capacity > 10000)

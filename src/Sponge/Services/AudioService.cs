@@ -13,7 +13,7 @@ namespace Sponge.Services
 {
     public class AudioService : Service
     {
-        public AudioService() : base(isRoutable: false)
+        public AudioService(ServiceProvider provider) : base(provider, isRoutable: false)
         {
             IsInitialized = true;
         }

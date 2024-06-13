@@ -45,13 +45,13 @@ namespace Sponge.Services
             Services = new Dictionary<string, Service>
             {
                 // WARNING: DO NOT CHANGE THE ORDER OF SERVICES. A fatal error can be occurred.
-                { "SVC_LOGGING", new LoggingService() },
-                { "SVC_CONFIG", new ConfigurationService() },
-                { "SVC_DIAGNOSTICS", new DiagnosticsService() },
-                { "SVC_LINK", new LinkService() },
-                { "SVC_CACHING", new CachingService() },
-                { "SVC_AUDIO", new AudioService() },
-                { "SVC_IMAGE", new ImageService() }
+                { "SVC_LOGGING", new LoggingService(this) },
+                { "SVC_CONFIG", new ConfigurationService(this) },
+                { "SVC_DIAGNOSTICS", new DiagnosticsService(this) },
+                { "SVC_LINK", new LinkService(this) },
+                { "SVC_CACHING", new CachingService(this) },
+                { "SVC_AUDIO", new AudioService(this) },
+                { "SVC_IMAGE", new ImageService(this) }
             };
 
             // INIT: Initialize an unhandled exception handler.
@@ -166,7 +166,11 @@ namespace Sponge.Services
             foreach (var pair in Services.Reverse())
             {
                 var service = pair.Value;
-                service.Stop();
+
+                if (service.IsInitialized && service.IsRunning)
+                {
+                    service.Stop();
+                }
             }
 
             Environment.Exit(exitCode);
